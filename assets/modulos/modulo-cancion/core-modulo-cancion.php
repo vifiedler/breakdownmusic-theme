@@ -3,17 +3,17 @@ function registrar_cpt_canciones()
 {
 
     $labels = array(
-        'name' => 'canciones',
-        'singular_name' => 'cancion',
+        'name' => 'Canciones',
+        'singular_name' => 'Canción',
         'menu_name' => 'canciones',
-        'name_admin_bar' => 'cancion',
+        'name_admin_bar' => 'Canción',
         'add_new' => 'Añadir nueva',
-        'add_new_item' => 'Añadir nueva cancion',
-        'new_item' => 'Nueva cancion',
-        'edit_item' => 'Editar cancion',
-        'view_item' => 'Ver cancion',
+        'add_new_item' => 'Añadir nueva canción',
+        'new_item' => 'Nueva canción',
+        'edit_item' => 'Editar canción',
+        'view_item' => 'Ver canción',
         'all_items' => 'Todos los canciones',
-        'search_items' => 'Buscar cancion',
+        'search_items' => 'Buscar canción',
         'not_found' => 'No se encontraron canciones',
         'not_found_in_trash' => 'No se encontraron canciones en la papelera',
         'featured_image' => 'Imagen destacada',
@@ -26,7 +26,7 @@ function registrar_cpt_canciones()
         'labels' => $labels,
         'public' => true,
         'has_archive' => true,
-        'menu_icon' => 'dashicons-music',
+        'menu_icon' => 'dashicons-format-audio',
         'rewrite' => array('slug' => 'canciones'),
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'),
@@ -48,7 +48,7 @@ function genero_cancion(){
         'genero_cancion',
         'cancion',
         array(
-            'label' => __('Genero cancion'),
+            'label' => __('Genero canción'),
             'rewrite' => array('slug' => 'genero-cancion'),
             'hierarchical' => true,
             // Allow cancionmatic creation of taxonomy columns on associated post-types table

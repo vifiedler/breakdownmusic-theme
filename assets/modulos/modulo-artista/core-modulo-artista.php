@@ -29,7 +29,7 @@ function registrar_cpt_artista()
         'labels' => $labels,
         'public' => true,
         'has_archive' => true,
-        'menu_icon' => 'dashicons-format-audio',
+        'menu_icon' => 'dashicons-microphone',
         'rewrite' => array('slug' => 'artistas'),
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'thumbnail'),
