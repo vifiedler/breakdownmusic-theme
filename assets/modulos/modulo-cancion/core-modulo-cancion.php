@@ -5,7 +5,7 @@ function registrar_cpt_canciones()
     $labels = array(
         'name' => 'Canciones',
         'singular_name' => 'Canción',
-        'menu_name' => 'canciones',
+        'menu_name' => 'Canciones',
         'name_admin_bar' => 'Canción',
         'add_new' => 'Añadir nueva',
         'add_new_item' => 'Añadir nueva canción',
