@@ -1,0 +1,269 @@
+#masthead,
+.fbs__net-navbar {
+    background-color: #0f0f0f !important;
+    border-bottom: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 52px;
+    width: 100%;
+}
+
+.navbar-brand {
+    margin-right: 0 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Logo */
+.fbs__net-navbar .navbar-brand-wrap {
+    flex: 0 0 auto;
+}
+
+.fbs__net-navbar .navbar-brand {
+    padding: 0;
+}
+
+.fbs__net-navbar .navbar-brand img {
+    width: 100%;
+    height: auto;
+    max-height: 70px;
+    object-fit: contain;
+}
+
+.site-logo {
+    height: 70px;
+    width: auto;
+}
+
+/* Links del menú */
+.fbs__net-navbar .navbar-nav .nav-item .nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75) !important;
+    padding: 0 14px !important;
+    line-height: 52px;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+    border-bottom: none;
+}
+
+.fbs__net-navbar .navbar-nav .nav-item .nav-link:hover,
+.fbs__net-navbar .navbar-nav .nav-item .nav-link:focus {
+    color: #fff !important;
+}
+
+.fbs__net-navbar .navbar-nav .nav-item.active > .nav-link,
+.fbs__net-navbar .navbar-nav .nav-item.current-menu-item > .nav-link {
+    color: #fff !important;
+    border-bottom: 2px solid #fff;
+}
+
+/* Ocultar flecha Bootstrap */
+.dropdown-toggle::after {
+    display: none;
+}
+
+.bi-chevron-down {
+    font-size: 0.6rem;
+    margin-left: 3px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.nav-link.dropdown-toggle.show .bi-chevron-down {
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+/* Dropdown */
+.fbs__net-navbar .dropdown-menu {
+    background: #111;
+    border: none;
+    border-radius: 0;
+    padding: 8px 0;
+    min-width: 200px;
+}
+
+.fbs__net-navbar .dropdown-menu .nav-link {
+    line-height: 1 !important;
+    padding: 10px 20px !important;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+}
+
+.fbs__net-navbar .dropdown-menu .nav-link:hover {
+    background: #222;
+}
+
+/* Botón Suscribirse */
+.fbs__net-navbar .navbar-nav .nav-item .nav-link.fbs__nav-subscribe {
+    color: #000 !important;
+    background: #fff;
+    padding: 7px 14px !important;
+    line-height: 1 !important;
+    margin: auto 0 auto 8px;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: none !important;
+}
+
+.fbs__net-navbar .navbar-nav .nav-item .nav-link.fbs__nav-subscribe:hover {
+    background: #e0e0e0;
+    color: #000 !important;
+}
+
+/* Toggler móvil */
+.fbs__net-navbar .navbar-toggler {
+    color: #fff;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.fbs__net-navbar .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* Buscador */
+.nav-search-wrap {
+    flex: 0 1 auto;
+    min-width: 200px;
+}
+
+.nav-search-wrap .search-form {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 2px 2px 2px 10px;
+  transition: border-color 0.2s;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav-search-wrap .search-form:hover,
+.nav-search-wrap .search-form:focus-within {
+    border-color: #fff;
+}
+
+.nav-search-wrap .search-form input[type="search"] {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 6px 8px;
+    flex: 1;
+    outline: none;
+    min-width: 120px;
+}
+
+.nav-search-wrap .search-form input[type="search"]::placeholder {
+    color: #888;
+}
+
+.nav-search-wrap .search-form .search-submit {
+    background-color: var(--breakdown-accent);
+    border: none;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.nav-search-wrap .search-form .search-submit:hover {
+    background-color: #c1121f;
+    color: #fff;
+}
+
+.nav-search-wrap .search-form .search-submit i.bi-search {
+    font-size: 0.85rem;
+    margin-right: 4px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    /* Logo ocupa todo el ancho en móvil/tablet */
+    .fbs__net-navbar .navbar-brand-wrap {
+        flex: 1 1 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .fbs__net-navbar .navbar-brand img {
+        max-height: 60px;
+        width: auto;
+        margin: 0 auto;
+    }
+
+    /* Toggler a la derecha */
+    .fbs__net-navbar .navbar-toggler {
+        margin-left: 0;
+    }
+
+    /* Menú y buscador en columna */
+    .fbs__net-navbar .collapse.navbar-collapse {
+        flex-basis: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .fbs__net-navbar .navbar-nav .nav-item .nav-link {
+        line-height: 1;
+        padding: 12px 0 !important;
+        border-bottom: 1px solid #222 !important;
+        white-space: normal;
+    }
+
+    .fbs__net-navbar .navbar-nav .nav-item.active > .nav-link,
+    .fbs__net-navbar .navbar-nav .nav-item.current-menu-item > .nav-link {
+        border-bottom: 1px solid #444 !important;
+    }
+
+    .fbs__net-navbar .navbar-nav .nav-item .nav-link.fbs__nav-subscribe {
+        display: inline-block;
+        margin: 12px 0 4px;
+        padding: 8px 16px !important;
+    }
+
+    /* Buscador debajo del menú */
+    .nav-search-wrap {
+        flex: 1 1 100%;
+        margin-top: 0.5rem;
+        padding: 0;
+        min-width: unset;
+    }
+
+    .nav-search-wrap .search-form {
+        width: 100%;
+    }
+
+    .nav-search-wrap .search-form input[type="search"] {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* pantallas muy pequeñas */
+@media (max-width: 576px) {
+    .fbs__net-navbar .navbar-brand img {
+        max-height: 50px;
+    }
+
+    .nav-search-wrap .search-form .search-submit {
+        padding: 4px 10px;
+        font-size: 0.65rem;
+    }
+}
