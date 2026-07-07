@@ -26,7 +26,7 @@ function registrar_cpt_canciones()
         'labels' => $labels,
         'public' => true,
         'has_archive' => true,
-        'menu_icon' => 'dashicons-format-cancion',
+        'menu_icon' => 'dashicons-music',
         'rewrite' => array('slug' => 'canciones'),
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'),
