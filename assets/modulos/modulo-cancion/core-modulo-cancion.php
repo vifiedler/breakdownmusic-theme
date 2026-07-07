@@ -46,7 +46,7 @@ add_action('init', 'registrar_cpt_canciones');
 function genero_cancion(){
     register_taxonomy(
         'genero_cancion',
-        'cancion',
+        'Canción',
         array(
             'label' => __('Genero canción'),
             'rewrite' => array('slug' => 'genero-cancion'),
