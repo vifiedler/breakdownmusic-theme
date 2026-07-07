@@ -43,7 +43,7 @@ function registrar_cpt_canciones()
 add_action('init', 'registrar_cpt_canciones');
 
 /*texonomía tipo de genero de los cancions */
-function genero_cancions(){
+function genero_cancion(){
     register_taxonomy(
         'genero_cancion',
         'cancion',
