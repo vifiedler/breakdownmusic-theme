@@ -207,3 +207,18 @@ function reemplazar_jquery_4()
 	wp_enqueue_script('jquery');
 }
 add_action('wp_enqueue_scripts', 'reemplazar_jquery_4', 999);
+function bd_enqueue_scripts()
+{
+	// Cargar jQuery y Bootstrap siempre
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('bootstrap-js');
+
+	// Cargar anime.js solo en single y archive
+	if (is_singular('canciones') || is_tax('genero_cancion')) {
+		wp_enqueue_script('anime-js');
+	}
+
+	// Cargar custom JS siempre
+	wp_enqueue_script('bd-custom', get_template_directory_uri() . '/assets/librerias/js/js-bdmusic.js', array('jquery'), null, true);
+}
+add_action('wp_enqueue_scripts', 'bd_enqueue_scripts');
