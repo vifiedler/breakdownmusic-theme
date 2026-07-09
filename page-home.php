@@ -24,7 +24,22 @@ get_header();
         </div>
 
         <?php
-        // Obtener todos los géneros
+        // 🔥 UNA SOLA CONSULTA: obtener TODAS las canciones publicadas
+        $all_songs = get_posts(array(
+            'post_type'      => 'canciones',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'orderby'        => 'rand', // aleatorio global
+            'fields'         => 'ids',  // solo IDs para ahorrar memoria
+        ));
+
+        if (empty($all_songs)) {
+            echo '<p>No hay canciones disponibles.</p>';
+            get_footer();
+            return;
+        }
+
+        // Obtener los términos de género
         $terms = get_terms(array(
             'taxonomy'   => 'genero_cancion',
             'hide_empty' => false,
@@ -32,151 +47,149 @@ get_header();
             'order'      => 'ASC',
         ));
 
-        if (!empty($terms) && !is_wp_error($terms)) :
+        if (empty($terms) || is_wp_error($terms)) {
+            echo '<p>No hay géneros configurados.</p>';
+            get_footer();
+            return;
+        }
 
-            // Separar destacados
-            $destacados = null;
-            $generos = array();
-            foreach ($terms as $term) {
-                if ($term->slug === 'destacados') {
-                    $destacados = $term;
-                } else {
-                    $generos[] = $term;
-                }
+        // 🔥 Agrupar IDs por género en PHP (sin consultas adicionales)
+        $songs_by_genre = array();
+        foreach ($terms as $term) {
+            $songs_by_genre[$term->slug] = array();
+        }
+
+        // Obtener las relaciones de taxonomía de todas las canciones (una sola consulta)
+        $term_relationships = wp_get_object_terms($all_songs, 'genero_cancion', array('fields' => 'all_with_object_id'));
+
+        // Agrupar: para cada canción, asignarla a su género
+        foreach ($term_relationships as $rel) {
+            if (isset($songs_by_genre[$rel->slug])) {
+                $songs_by_genre[$rel->slug][] = $rel->object_id;
             }
+        }
 
-            // Obtener los slugs de todos los géneros para la consulta
-            $slugs = array();
-            if ($destacados) $slugs[] = $destacados->slug;
-            foreach ($generos as $g) $slugs[] = $g->slug;
+        // Ahora, para cada género, obtener los datos completos de las canciones (solo las que pertenecen)
+        // PERO: haremos un solo query por género con post__in, que es rápido
+        // Para evitar múltiples queries, podemos obtener todos los posts de una vez con post__in = todos los IDs
+        // y luego filtrar en PHP, pero eso ya lo tenemos: $all_songs tiene todos los IDs.
+        // Lo que haremos es: para cada género, obtener los posts completos de sus IDs.
+        // Pero como son pocos IDs por género, podemos hacer un solo get_posts con post__in = todos los IDs
+        // y luego en PHP agrupar por género. Eso es UNA SOLA CONSULTA extra.
+        // Ya tenemos $all_songs que son los IDs. Ahora obtenemos los posts completos.
+        $all_posts = get_posts(array(
+            'post_type'      => 'canciones',
+            'post__in'       => $all_songs,
+            'posts_per_page' => -1,
+            'orderby'        => 'post__in', // mantener el orden aleatorio
+        ));
 
-            if (!empty($slugs)) :
+        // Indexar los posts por ID para acceso rápido
+        $posts_by_id = array();
+        foreach ($all_posts as $post) {
+            $posts_by_id[$post->ID] = $post;
+        }
 
-                // 🔥 UNA SOLA CONSULTA para TODAS las canciones de TODOS los géneros
-                $args = array(
-                    'post_type'      => 'canciones',
-                    'posts_per_page' => 18, // 12 por género * 6 géneros = 72 máx, pero limitamos a 18 para no sobrecargar
-                    'orderby'        => 'rand',
-                    'tax_query'      => array(
-                        array(
-                            'taxonomy' => 'genero_cancion',
-                            'field'    => 'slug',
-                            'terms'    => $slugs,
-                        ),
-                    ),
-                );
-                $query = new WP_Query($args);
-                $all_posts = $query->posts;
-
-                // Agrupar posts por género en memoria
-                $posts_por_genero = array();
-                foreach ($all_posts as $post) {
-                    $terms_of_post = wp_get_post_terms($post->ID, 'genero_cancion', array('fields' => 'slugs'));
-                    foreach ($terms_of_post as $slug) {
-                        if (in_array($slug, $slugs)) {
-                            $posts_por_genero[$slug][] = $post;
-                            break; // Solo asignar a un género (el primero)
-                        }
-                    }
-                }
-
-                // --- Función para renderizar un carrusel ---
-                function render_carousel($posts, $show_duration = true) {
-                    if (empty($posts)) return;
+        // Función para renderizar el carrusel de un género dado su slug y array de IDs
+        function render_carousel($genre_slug, $post_ids, $posts_by_id) {
+            if (empty($post_ids)) return;
+            // Tomar solo los primeros 12 (aleatorio ya está aplicado globalmente)
+            $ids = array_slice($post_ids, 0, 12);
+            if (empty($ids)) return;
+            ?>
+            <div class="bd-carousel-wrap">
+                <div class="bd-carousel-track" data-page="0">
+                    <?php foreach ($ids as $id) :
+                        $post = $posts_by_id[$id];
+                        if (!$post) continue;
+                        setup_postdata($post);
+                        $img_url = get_the_post_thumbnail_url($id, 'medium');
+                        if (!$img_url) $img_url = 'https://via.placeholder.com/300x300?text=No+Image';
+                        $artista_obj = get_field('artista', $id);
+                        $artista_nombre = is_array($artista_obj) && !empty($artista_obj) ? $artista_obj[0]->post_title : 'Artista desconocido';
+                        $duracion_seg = get_field('duracion', $id);
+                        $duracion = $duracion_seg ? sprintf('%02d:%02d', floor($duracion_seg / 60), $duracion_seg % 60) : '';
+                        $url_cancion = get_field('url_cancion', $id);
                     ?>
-                    <div class="bd-carousel-wrap">
-                        <div class="bd-carousel-track" data-page="0">
-                            <?php foreach ($posts as $post) : setup_postdata($post);
-                                $img_url = get_the_post_thumbnail_url($post->ID, 'medium');
-                                if (!$img_url) $img_url = 'https://via.placeholder.com/300x300?text=No+Image';
-                                $artista_obj = get_field('artista', $post->ID);
-                                $artista_nombre = is_array($artista_obj) && !empty($artista_obj) ? $artista_obj[0]->post_title : 'Artista desconocido';
-                                $duracion_seg = get_field('duracion', $post->ID);
-                                $duracion = $duracion_seg ? sprintf('%02d:%02d', floor($duracion_seg / 60), $duracion_seg % 60) : '';
-                                $url_cancion = get_field('url_cancion', $post->ID);
-                            ?>
-                                <div class="bd-card">
-                                    <a href="<?php echo get_permalink($post->ID); ?>" class="d-block text-decoration-none">
-                                        <div class="bd-card-thumb-wrap">
-                                            <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($post->post_title); ?>" class="bd-card-thumb" loading="lazy">
-                                            <button class="bd-play-btn" 
-                                                    data-id="<?php echo $post->ID; ?>" 
-                                                    data-url="<?php echo esc_url($url_cancion); ?>"
-                                                    data-permalink="<?php echo get_permalink($post->ID); ?>">
-                                                <i class="bi bi-play-fill"></i>
-                                            </button>
-                                            <?php if ($duracion && $show_duration) : ?>
-                                                <span class="bd-card-duration"><?php echo esc_html($duracion); ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </a>
-                                    <div class="bd-card-body">
-                                        <h5 class="bd-card-title">
-                                            <a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a>
-                                        </h5>
-                                        <p class="bd-card-artist"><?php echo esc_html($artista_nombre); ?></p>
-                                    </div>
+                        <div class="bd-card">
+                            <a href="<?php echo get_permalink($id); ?>" class="d-block text-decoration-none">
+                                <div class="bd-card-thumb-wrap">
+                                    <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title($id)); ?>" class="bd-card-thumb" loading="lazy">
+                                    <button class="bd-play-btn" data-id="<?php echo $id; ?>" data-url="<?php echo esc_url($url_cancion); ?>" data-permalink="<?php echo get_permalink($id); ?>">
+                                        <i class="bi bi-play-fill"></i>
+                                    </button>
+                                    <?php if ($duracion) : ?>
+                                        <span class="bd-card-duration"><?php echo esc_html($duracion); ?></span>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endforeach; wp_reset_postdata(); ?>
+                            </a>
+                            <div class="bd-card-body">
+                                <h5 class="bd-card-title">
+                                    <a href="<?php echo get_permalink($id); ?>"><?php echo get_the_title($id); ?></a>
+                                </h5>
+                                <p class="bd-card-artist"><?php echo esc_html($artista_nombre); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php
+            wp_reset_postdata();
+        }
+
+        // Mostrar destacados primero
+        if (isset($songs_by_genre['destacados']) && !empty($songs_by_genre['destacados'])) {
+            $term_link = get_term_link('destacados', 'genero_cancion');
+            ?>
+            <section class="row mb-5 bd-section">
+                <div class="col-12">
+                    <div class="bd-section-head">
+                        <h2 class="bd-section-title">Escuchado de nuevo</h2>
+                        <div class="bd-section-controls">
+                            <?php if (!is_wp_error($term_link)) : ?>
+                                <a href="<?php echo esc_url($term_link); ?>" class="bd-more-btn">Ver más</a>
+                            <?php endif; ?>
+                            <div class="bd-carousel-controls">
+                                <button class="bd-carousel-btn bd-carousel-prev"><i class="bi bi-chevron-left"></i></button>
+                                <button class="bd-carousel-btn bd-carousel-next"><i class="bi bi-chevron-right"></i></button>
+                            </div>
                         </div>
                     </div>
-                    <?php
-                }
+                    <?php render_carousel('destacados', $songs_by_genre['destacados'], $posts_by_id); ?>
+                </div>
+            </section>
+            <?php
+            unset($songs_by_genre['destacados']); // para no mostrarlo de nuevo
+        }
 
-                // --- Mostrar destacados ---
-                if ($destacados && !empty($posts_por_genero[$destacados->slug])) :
-                    $term_link = get_term_link($destacados);
-                ?>
-                    <section class="row mb-5 bd-section">
-                        <div class="col-12">
-                            <div class="bd-section-head">
-                                <h2 class="bd-section-title">Escuchado de nuevo</h2>
-                                <div class="bd-section-controls">
-                                    <?php if (!is_wp_error($term_link)) : ?>
-                                        <a href="<?php echo esc_url($term_link); ?>" class="bd-more-btn">Ver más</a>
-                                    <?php endif; ?>
-                                    <div class="bd-carousel-controls">
-                                        <button class="bd-carousel-btn bd-carousel-prev"><i class="bi bi-chevron-left"></i></button>
-                                        <button class="bd-carousel-btn bd-carousel-next"><i class="bi bi-chevron-right"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php render_carousel($posts_por_genero[$destacados->slug]); ?>
+        // Mostrar el resto de géneros
+        foreach ($terms as $term) {
+            if ($term->slug === 'destacados') continue;
+            if (empty($songs_by_genre[$term->slug])) continue;
+            $term_link = get_term_link($term);
+            ?>
+            <section class="row mb-5 bd-section">
+                <div class="col-12">
+                    <div class="bd-section-head">
+                        <div>
+                            <span class="bd-section-eyebrow">Género</span>
+                            <h2 class="bd-section-title"><?php echo esc_html($term->name); ?></h2>
                         </div>
-                    </section>
-                <?php
-                endif;
-
-                // --- Mostrar el resto de géneros ---
-                foreach ($generos as $term) :
-                    if (empty($posts_por_genero[$term->slug])) continue;
-                    $term_link = get_term_link($term);
-                ?>
-                    <section class="row mb-5 bd-section">
-                        <div class="col-12">
-                            <div class="bd-section-head">
-                                <div>
-                                    <span class="bd-section-eyebrow">Género</span>
-                                    <h2 class="bd-section-title"><?php echo esc_html($term->name); ?></h2>
-                                </div>
-                                <div class="bd-section-controls">
-                                    <?php if (!is_wp_error($term_link)) : ?>
-                                        <a href="<?php echo esc_url($term_link); ?>" class="bd-more-btn">Ver más</a>
-                                    <?php endif; ?>
-                                    <div class="bd-carousel-controls">
-                                        <button class="bd-carousel-btn bd-carousel-prev"><i class="bi bi-chevron-left"></i></button>
-                                        <button class="bd-carousel-btn bd-carousel-next"><i class="bi bi-chevron-right"></i></button>
-                                    </div>
-                                </div>
+                        <div class="bd-section-controls">
+                            <?php if (!is_wp_error($term_link)) : ?>
+                                <a href="<?php echo esc_url($term_link); ?>" class="bd-more-btn">Ver más</a>
+                            <?php endif; ?>
+                            <div class="bd-carousel-controls">
+                                <button class="bd-carousel-btn bd-carousel-prev"><i class="bi bi-chevron-left"></i></button>
+                                <button class="bd-carousel-btn bd-carousel-next"><i class="bi bi-chevron-right"></i></button>
                             </div>
-                            <?php render_carousel($posts_por_genero[$term->slug]); ?>
                         </div>
-                    </section>
-                <?php
-                endforeach;
-
-            endif;
-        endif;
+                    </div>
+                    <?php render_carousel($term->slug, $songs_by_genre[$term->slug], $posts_by_id); ?>
+                </div>
+            </section>
+            <?php
+        }
         ?>
 
     </div>

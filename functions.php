@@ -140,7 +140,7 @@ add_action('widgets_init', 'breakdownmusic_theme_widgets_init');
 /**
  * Enqueue scripts and styles.
  */
-function breakdownmusic_theme_scripts()
+/*function breakdownmusic_theme_scripts()
 {
 	wp_enqueue_style('breakdownmusic-theme-style', get_stylesheet_uri(), array(), _S_VERSION);
 	wp_style_add_data('breakdownmusic-theme-style', 'rtl', 'replace');
@@ -151,7 +151,7 @@ function breakdownmusic_theme_scripts()
 		wp_enqueue_script('comment-reply');
 	}
 }
-add_action('wp_enqueue_scripts', 'breakdownmusic_theme_scripts');
+add_action('wp_enqueue_scripts', 'breakdownmusic_theme_scripts');*/
 
 /**
  * Implement the Custom Header feature.
