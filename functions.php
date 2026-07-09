@@ -209,16 +209,18 @@ function reemplazar_jquery_4()
 add_action('wp_enqueue_scripts', 'reemplazar_jquery_4', 999);
 function bd_enqueue_scripts()
 {
-	// Cargar jQuery y Bootstrap siempre
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('bootstrap-js');
+	// jQuery ya se reemplaza en reemplazar_jquery_4, no lo encoles dos veces
+	// wp_enqueue_script('jquery'); // Esto ya lo hace WordPress
 
-	// Cargar anime.js solo en single y archive
+	// Bootstrap JS
+	wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js', array(), null, true);
+
+	// Anime.js solo donde se necesita
 	if (is_singular('canciones') || is_tax('genero_cancion')) {
-		wp_enqueue_script('anime-js');
+		wp_enqueue_script('anime-js', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js', array(), null, true);
 	}
 
-	// Cargar custom JS siempre
+	// Custom JS
 	wp_enqueue_script('bd-custom', get_template_directory_uri() . '/assets/librerias/js/js-bdmusic.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'bd_enqueue_scripts');
