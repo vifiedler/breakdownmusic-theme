@@ -1450,3 +1450,24 @@ body {
     .bd-artist-hero{margin:-1.25rem -1rem 1.5rem;min-height:300px;}
     .bd-artist-name{font-size:2rem;}
 }
+
+.bd-card-thumb-wrap {
+    position: relative;
+}
+.bd-card-duration {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #fff;
+    pointer-events: none; /* para que no interfiera con el hover del botón */
+}
+.bd-play-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    /* resto de estilos ya están en el CSS */
+}
