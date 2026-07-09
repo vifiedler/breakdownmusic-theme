@@ -1,16 +1,23 @@
 /* ============================================
-   BREAKDOWN — estilo estático tipo YT Music
+   BREAKDOWN MUSIC - ESTILOS PRINCIPALES
+   Basado en diseño tipo YouTube Music
    ============================================ */
 
+/* ============================================
+   1. VARIABLES Y RESET
+   ============================================ */
 :root {
     --bd-bg: #0f0f0f;
     --bd-panel: #161616;
-    --bd-card: #1a1a1a;
+    --bd-card-bg: #1a1a1a;
     --bd-text: #f0ece3;
     --bd-text-muted: #a0a0a0;
     --bd-accent: #e63946;
+    --bd-accent-hover: #c1121f;
     --bd-sidebar-w: 220px;
     --bd-sidebar-w-collapsed: 72px;
+    --bd-font: 'Inter', sans-serif;
+    --bd-font-logo: 'Frank Ruhl Libre', serif;
 }
 
 html,
@@ -18,13 +25,17 @@ body {
     background: var(--bd-bg);
     color: var(--bd-text);
     overflow-x: hidden;
+    font-family: var(--bd-font);
 }
 
-body {
-    font-family: 'Inter', sans-serif;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-/* ===== Topbar ===== */
+/* ============================================
+   2. TOPBAR
+   ============================================ */
 .bd-topbar {
     height: 64px;
     display: flex;
@@ -48,7 +59,7 @@ body {
 }
 
 .bd-logo {
-    font-family: 'Frank Ruhl Libre', serif;
+    font-family: var(--bd-font-logo);
     font-size: 1.3rem;
     font-weight: 700;
     display: flex;
@@ -141,7 +152,9 @@ body {
     flex-shrink: 0;
 }
 
-/* ===== Sidebar ===== */
+/* ============================================
+   3. SIDEBAR
+   ============================================ */
 .bd-layout {
     display: flex;
     min-height: calc(100vh - 64px);
@@ -191,13 +204,18 @@ body {
     display: none;
 }
 
-/* ===== Main ===== */
+/* ============================================
+   4. MAIN
+   ============================================ */
 .bd-main {
     flex: 1;
     padding: 1.5rem 2rem;
     min-width: 0;
 }
 
+/* ============================================
+   5. HOME - MOOD PILLS
+   ============================================ */
 .bd-mood-pills {
     display: flex;
     gap: 10px;
@@ -223,6 +241,9 @@ body {
     border-color: var(--bd-accent);
 }
 
+/* ============================================
+   6. HOME - SECCIONES Y CARRUSEL
+   ============================================ */
 .bd-section {
     margin-bottom: 2.5rem;
 }
@@ -235,7 +256,7 @@ body {
 }
 
 .bd-section-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-size: 1.9rem;
     font-weight: 800;
     margin: 0;
@@ -252,7 +273,6 @@ body {
     margin-bottom: 2px;
 }
 
-/* Controles del carrusel arriba a la derecha, junto al título */
 .bd-section-controls {
     display: flex;
     align-items: center;
@@ -283,7 +303,9 @@ body {
     border-color: var(--bd-text);
 }
 
-/* ===== Carousel ===== */
+/* ============================================
+   7. HOME - CARRUSEL Y CARDS
+   ============================================ */
 .bd-carousel-wrap {
     position: relative;
 }
@@ -330,12 +352,13 @@ body {
     border-color: #444;
 }
 
-/* ===== Card ===== */
+/* --- Cards --- */
 .bd-card {
     flex: 0 0 200px;
-    cursor: pointer;
+    min-width: 0;
     text-decoration: none;
-    color: inherit;
+    color: var(--bd-text);
+    cursor: pointer;
     display: block;
 }
 
@@ -360,6 +383,27 @@ body {
     opacity: .75;
 }
 
+.bd-card-title,
+.bd-card-sub {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    margin: 4px 0;
+}
+
+.bd-card-title {
+    font-size: .88rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.bd-card-sub {
+    font-size: .76rem;
+    color: var(--bd-text-muted);
+}
+
+/* --- Botón de play (hover) --- */
 .bd-play-btn {
     position: absolute;
     bottom: 10px;
@@ -377,6 +421,8 @@ body {
     opacity: 0;
     transform: translateY(8px) scale(.8);
     transition: opacity .2s ease, transform .2s ease;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .bd-card:hover .bd-play-btn {
@@ -385,64 +431,52 @@ body {
 }
 
 .bd-play-btn:hover {
-    background: #c1121f;
+    background: var(--bd-accent-hover);
 }
 
-.bd-card-title {
-    font-size: .88rem;
+/* ============================================
+   8. MODAL DEL REPRODUCTOR
+   ============================================ */
+.modal-content.bg-dark {
+    background: var(--bd-bg) !important;
+}
+
+#bdMusicModal .modal-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #222;
+}
+
+#bdMusicModal .modal-title {
+    font-family: var(--bd-font);
     font-weight: 600;
-    margin: 10px 0 2px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 1rem;
 }
 
-.bd-card-sub {
-    font-size: .76rem;
-    color: var(--bd-text-muted);
-    margin: 0;
+#bdMusicModal .btn-close-white {
+    filter: invert(1);
 }
 
-.bd-card.bd-card-wide {
-    flex: 0 0 260px;
+/* ============================================
+   9. ANIMACIONES
+   ============================================ */
+.fade-in-up {
+    animation: fadeInUp 0.2s ease-out forwards;
 }
 
-.bd-card-wide .bd-card-thumb-wrap {
-    aspect-ratio: 16/9;
-}
-
-@media(max-width:768px) {
-    .bd-sidebar {
-        position: fixed;
-        left: 0;
-        top: 64px;
-        bottom: 0;
-        z-index: 80;
-        width: 0;
-        padding: 1.25rem 0;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
 
-    .bd-sidebar.open {
-        width: 220px;
-        padding: 1.25rem .5rem;
-    }
-
-    .bd-main {
-        padding: 1.25rem 1rem;
-    }
-
-    .bd-search-wrap {
-        max-width: none;
-    }
-
-    .bd-logo span {
-        display: none;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* ============================================
-   SINGLE — vista de álbum/canción
+   10. SINGLE (ÁLBUM)
    ============================================ */
 .bd-single-layout {
     display: flex;
@@ -450,7 +484,6 @@ body {
     align-items: flex-start;
 }
 
-/* Columna izquierda: info del álbum, fija */
 .bd-single-info {
     flex: 0 0 340px;
     position: sticky;
@@ -492,7 +525,7 @@ body {
 }
 
 .bd-single-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 1.7rem;
     line-height: 1.15;
@@ -560,7 +593,6 @@ body {
     color: var(--bd-accent);
 }
 
-/* Columna derecha: tracklist con scroll propio */
 .bd-single-tracklist {
     flex: 1;
     min-width: 0;
@@ -653,28 +685,11 @@ body {
     text-align: right;
 }
 
-@media(max-width:900px) {
-    .bd-single-layout {
-        flex-direction: column;
-    }
-
-    .bd-single-info {
-        position: static;
-        flex: 1 1 auto;
-        width: 100%;
-    }
-
-    .bd-single-tracklist {
-        max-height: none;
-        overflow-y: visible;
-    }
-}
-
 /* ============================================
-   ARCHIVE — vista de género/categoría
+   11. ARCHIVE (GÉNERO)
    ============================================ */
 .bd-archive-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 2.6rem;
     letter-spacing: -1px;
@@ -682,13 +697,12 @@ body {
 }
 
 .bd-archive-section-label {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 700;
     font-size: 1.15rem;
     margin: 0;
 }
 
-/* Grid de canciones — scroll infinito, fluye por filas */
 .bd-song-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -719,7 +733,7 @@ body {
 }
 
 /* ============================================
-   SEARCH — página de resultados de búsqueda
+   12. SEARCH (BÚSQUEDA)
    ============================================ */
 .bd-search-page-input-wrap {
     max-width: 900px;
@@ -939,20 +953,8 @@ body {
     text-overflow: ellipsis;
 }
 
-@media(max-width:768px) {
-    .bd-search-filters {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 4px;
-    }
-
-    .bd-search-radio-card {
-        flex-wrap: wrap;
-    }
-}
-
 /* ============================================
-   TERMS — términos y condiciones + FAQ acordeón
+   13. TERMS (TÉRMINOS Y FAQ)
    ============================================ */
 .bd-legal-wrap {
     max-width: 760px;
@@ -960,7 +962,7 @@ body {
 }
 
 .bd-legal-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 2.2rem;
     letter-spacing: -1px;
@@ -991,7 +993,7 @@ body {
 }
 
 .bd-faq-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 1.6rem;
     margin: 2.5rem 0 1.25rem;
@@ -1040,340 +1042,11 @@ body {
     line-height: 1.65;
 }
 
-.bd-song-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: .55rem .5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-}
-
-.bd-song-card:hover {
-    background: #1a1a1a;
-    color: inherit;
-}
-
-.bd-song-thumb-wrap {
-    position: relative;
-    width: 52px;
-    height: 52px;
-    border-radius: 6px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: #000;
-}
-
-.bd-song-thumb-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.bd-song-thumb-wrap .bi-play-fill {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, .5);
-    color: #fff;
-    font-size: 1.2rem;
-    opacity: 0;
-    transition: opacity .15s;
-}
-
-.bd-song-card:hover .bd-song-thumb-wrap .bi-play-fill {
-    opacity: 1;
-}
-
-.bd-song-info {
-    min-width: 0;
-}
-
-.bd-song-title {
-    font-size: .88rem;
-    font-weight: 600;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-song-sub {
-    font-size: .76rem;
-    color: var(--bd-text-muted);
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-@media(max-width:900px) {
-    .bd-song-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media(max-width:576px) {
-    .bd-song-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ============================================
-   SEARCH — página de resultados
-   ============================================ */
-.bd-search-page-form {
-    display: flex;
-    align-items: center;
-    background: var(--bd-panel);
-    border: 1px solid #2a2a2a;
-    border-radius: 24px;
-    padding: 10px 8px 10px 20px;
-    max-width: 640px;
-    margin: 1rem auto 0;
-}
-
-.bd-search-page-form input {
-    background: transparent;
-    border: none;
-    color: var(--bd-text);
-    flex: 1;
-    outline: none;
-    font-size: 1rem;
-}
-
-.bd-search-page-form input::placeholder {
-    color: #777;
-}
-
-.bd-search-clear {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: 1.1rem;
-    padding: 4px 10px;
-}
-
-.bd-search-clear:hover {
-    color: var(--bd-text);
-}
-
-.bd-search-tabs {
-    display: flex;
-    gap: 2rem;
-    max-width: 640px;
-    margin: 1.5rem auto 0;
-    border-bottom: 1px solid #222;
-}
-
-.bd-search-tab {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: .85rem;
-    font-weight: 700;
-    letter-spacing: .5px;
-    padding: 0 0 .8rem;
-    border-bottom: 2px solid transparent;
-}
-
-.bd-search-tab.active {
-    color: var(--bd-text);
-    border-bottom-color: var(--bd-text);
-}
-
-.bd-search-filters {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    max-width: 900px;
-    margin: 1.25rem auto 0;
-}
-
-.bd-search-radio-card {
-    max-width: 900px;
-    margin: 1.5rem auto 0;
-    background: var(--bd-panel);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.bd-search-radio-thumb {
-    width: 64px;
-    height: 64px;
-    border-radius: 8px;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.bd-search-radio-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.bd-search-radio-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.bd-search-radio-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin: 0 0 2px;
-}
-
-.bd-search-radio-sub {
-    font-size: .8rem;
-    color: var(--bd-text-muted);
-    margin: 0;
-}
-
-.bd-search-play-btn {
-    background: var(--bd-text);
-    color: var(--bd-bg);
-    border: none;
-    border-radius: 20px;
-    padding: 9px 22px;
-    font-weight: 700;
-    font-size: .85rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-}
-
-.bd-search-play-btn:hover {
-    background: var(--bd-accent);
-    color: #fff;
-}
-
-.bd-search-more-btn {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.bd-search-more-btn:hover {
-    color: var(--bd-text);
-}
-
-.bd-search-results-list {
-    max-width: 900px;
-    margin: 1.5rem auto 0;
-}
-
-.bd-search-result-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: .65rem .5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    color: inherit;
-}
-
-.bd-search-result-row:hover {
-    background: #1a1a1a;
-    color: inherit;
-}
-
-.bd-search-result-thumb {
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-    overflow: hidden;
-    background: #000;
-    border-radius: 6px;
-}
-
-.bd-search-result-thumb.bd-thumb-round {
-    border-radius: 50%;
-}
-
-.bd-search-result-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.bd-search-result-info {
-    min-width: 0;
-}
-
-.bd-search-result-title {
-    font-size: .92rem;
-    font-weight: 700;
-    margin: 0 0 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-search-result-sub {
-    font-size: .78rem;
-    color: var(--bd-text-muted);
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* ============================================
-   FOOTER — compartido en todas las páginas
-   ============================================ */
-.bd-footer {
-    border-top: 1px solid #1e1e1e;
-    margin-top: 3rem;
-    padding: 1.5rem 0 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    font-size: .78rem;
-    color: #555;
-}
-
-.bd-footer a {
-    color: #777;
-    text-decoration: none;
-}
-
-.bd-footer a:hover {
-    color: var(--bd-text);
-}
-
-/* ============================================
-   BIBLIOTECA — grid de cards con scroll infinito
+   14. LIBRARY (BIBLIOTECA)
    ============================================ */
 .bd-library-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 2.2rem;
-    letter-spacing: -1px;
-    margin: 0 0 1.75rem;
-}
-
-.bd-library-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem 1.25rem;
-}
-
-/* ============================================
-   LIBRARY — grid de todos los temas, scroll infinito
-   ============================================ */
-.bd-library-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 2.2rem;
     letter-spacing: -1px;
@@ -1387,7 +1060,7 @@ body {
 }
 
 /* ============================================
-   ARTIST — página de artista
+   15. ARTIST (PÁGINA DE ARTISTA)
    ============================================ */
 .bd-artist-hero {
     position: relative;
@@ -1408,7 +1081,7 @@ body {
 }
 
 .bd-artist-name {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 3rem;
     letter-spacing: -1.5px;
@@ -1497,7 +1170,6 @@ body {
     color: #fff;
 }
 
-/* Top songs — lista */
 .bd-artist-songs-list {
     max-width: 900px;
 }
@@ -1582,7 +1254,83 @@ body {
     color: var(--bd-accent);
 }
 
-@media(max-width:768px) {
+/* ============================================
+   16. FOOTER
+   ============================================ */
+.bd-footer {
+    border-top: 1px solid #1e1e1e;
+    margin-top: 3rem;
+    padding: 1.5rem 0 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: .78rem;
+    color: #555;
+}
+
+.bd-footer a {
+    color: #777;
+    text-decoration: none;
+}
+
+.bd-footer a:hover {
+    color: var(--bd-text);
+}
+
+/* ============================================
+   17. MEDIA QUERIES
+   ============================================ */
+
+/* Tablets y móviles grandes */
+@media (max-width: 991px) {
+    .bd-sidebar {
+        position: fixed;
+        left: 0;
+        top: 64px;
+        bottom: 0;
+        z-index: 80;
+        width: 0;
+        padding: 1.25rem 0;
+    }
+
+    .bd-sidebar.open {
+        width: 220px;
+        padding: 1.25rem .5rem;
+    }
+
+    .bd-main {
+        padding: 1.25rem 1rem;
+    }
+
+    .bd-search-wrap {
+        max-width: none;
+    }
+
+    .bd-logo span {
+        display: none;
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    .bd-section-title {
+        font-size: 1.4rem;
+    }
+
+    .bd-card {
+        flex: 0 0 150px;
+    }
+
+    .bd-mood-pills {
+        gap: 6px;
+    }
+
+    .bd-pill {
+        font-size: .7rem;
+        padding: 6px 12px;
+    }
+
     .bd-artist-hero {
         margin: -1.25rem -1rem 1.5rem;
         min-height: 300px;
@@ -1591,67 +1339,367 @@ body {
     .bd-artist-name {
         font-size: 2rem;
     }
+
+    .bd-single-layout {
+        flex-direction: column;
+    }
+
+    .bd-single-info {
+        position: static;
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .bd-single-tracklist {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .bd-song-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bd-search-filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+
+    .bd-search-radio-card {
+        flex-wrap: wrap;
+    }
 }
 
-.bd-card-thumb-wrap {
+/* Móviles muy pequeños */
+@media (max-width: 576px) {
+    .bd-card {
+        flex: 0 0 130px;
+    }
+
+    .bd-song-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bd-section-controls {
+        gap: 8px;
+    }
+
+    .bd-more-btn {
+        padding: 4px 12px;
+        font-size: .7rem;
+    }
+
+    .bd-carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: .75rem;
+    }
+}
+
+/* ============================================
+   REPRODUCTOR FIJO INFERIOR
+   ============================================ */
+.bd-player-bar {
+    display: none;
+    /* Oculto por defecto */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bd-panel);
+    border-top: 1px solid #2a2a2a;
+    padding: 10px 1rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8);
+    height: 80px;
+    transition: transform 0.3s ease, height 0.3s ease;
+}
+
+.bd-player-bar.visible {
+    display: block;
+    /* o flex, según tu estructura */
+}
+
+.bd-player-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
     position: relative;
 }
 
-.bd-card-duration {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2px 8px;
+/* Info canción */
+.bd-player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 180px;
+    flex: 0 0 auto;
+}
+
+.bd-player-thumb {
+    width: 56px;
+    height: 56px;
     border-radius: 4px;
+    object-fit: cover;
+    background: #222;
+    flex-shrink: 0;
+}
+
+.bd-player-meta {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.bd-player-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bd-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bd-player-artist {
     font-size: 0.75rem;
-    color: #fff;
-    pointer-events: none;
-    /* para que no interfiera con el hover del botón */
-}
-
-.bd-play-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    /* resto de estilos ya están en el CSS */
-}
-
-.bd-card-duration {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    pointer-events: none;
-}
-
-.bd-card-body {
-    padding: 0.5rem 0;
-}
-
-.bd-card-artist {
-    font-size: 0.8rem;
     color: var(--bd-text-muted);
-    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Animación de entrada sin anime.js */
-.fade-in-up {
-    animation: fadeInUp 0.2s ease-out forwards;
+/* Controles */
+.bd-player-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
+.bd-player-btn {
+    background: none;
+    border: none;
+    color: var(--bd-text);
+    font-size: 1.5rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.bd-player-btn:hover {
+    color: var(--bd-accent);
+}
+
+.bd-player-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* Barra de progreso */
+.bd-player-progress-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.bd-player-time {
+    font-size: 0.7rem;
+    color: var(--bd-text-muted);
+    font-variant-numeric: tabular-nums;
+    min-width: 40px;
+}
+
+.bd-player-progress {
+    flex: 1;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    transition: height 0.2s;
+}
+
+.bd-player-progress:hover {
+    height: 6px;
+}
+
+.bd-player-progress-bar {
+    height: 100%;
+    background: var(--bd-accent);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.bd-player-progress:hover .bd-player-progress-bar {
+    background: #fff;
+}
+
+/* Botón minimizar */
+.bd-player-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--bd-text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.bd-player-toggle:hover {
+    color: var(--bd-text);
+}
+
+.bd-player-toggle .bi-chevron-down {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Estado minimizado (solo si visible) */
+.bd-player-bar.minimized {
+    height: 60px;
+}
+
+.bd-player-bar.minimized .bd-player-progress-wrap,
+.bd-player-bar.minimized .bd-player-controls {
+    display: none;
+}
+
+.bd-player-bar.minimized .bd-player-info {
+    min-width: auto;
+}
+
+.bd-player-bar.minimized .bd-player-thumb {
+    width: 40px;
+    height: 40px;
+}
+
+.bd-player-bar.minimized .bd-player-meta {
+    display: none;
+}
+
+.bd-player-bar.minimized .bd-player-toggle .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Estado vacío (sin canción) - solo deshabilita controles, no oculta */
+.bd-player-bar.empty .bd-player-controls,
+.bd-player-bar.empty .bd-player-progress-wrap {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Responsive (ajustes) */
+@media (max-width: 768px) {
+    .bd-player-bar {
+        height: 70px;
+        padding: 6px 0.5rem;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .bd-player-bar.minimized {
+        height: 50px;
     }
+
+    .bd-player-thumb {
+        width: 44px;
+        height: 44px;
+    }
+
+    .bd-player-bar.minimized .bd-player-thumb {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bd-player-title {
+        font-size: 0.75rem;
+    }
+
+    .bd-player-artist {
+        font-size: 0.65rem;
+    }
+
+    .bd-player-btn {
+        font-size: 1.2rem;
+    }
+
+    .bd-player-info {
+        min-width: 120px;
+    }
+
+    .bd-player-time {
+        font-size: 0.6rem;
+        min-width: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .bd-player-info {
+        min-width: 80px;
+    }
+
+    .bd-player-thumb {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bd-player-meta {
+        display: none;
+    }
+}
+
+/* Botón de play en tracks relacionados */
+.bd-track-num .bd-play-btn-track {
+    background: none;
+    border: none;
+    color: var(--bd-text-muted);
+    font-size: 0.9rem;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.bd-track-num .bd-play-btn-track:hover {
+    color: var(--bd-accent);
+}
+
+.bd-track-row:hover .bd-track-num .bd-play-btn-track {
+    color: var(--bd-text);
+}
+
+/* ============================================
+   CANCIONES DEL GÉNERO (grid en single de álbum)
+   ============================================ */
+.bd-song-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bd-song-card {
+    transition: background 0.15s;
+}
+
+.bd-song-card:hover {
+    background: #1a1a1a;
+}
+
+.bd-song-card:hover .bd-play-btn-track {
+    opacity: 1 !important;
+}
+
+.bd-song-thumb-wrap .bd-play-btn-track {
+    opacity: 0;
+}
+
+.bd-song-thumb-wrap:hover .bd-play-btn-track {
+    opacity: 1;
 }

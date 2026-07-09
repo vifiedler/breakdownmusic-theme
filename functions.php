@@ -207,3 +207,6 @@ function reemplazar_jquery_4()
 	wp_enqueue_script('jquery');
 }
 add_action('wp_enqueue_scripts', 'reemplazar_jquery_4', 999);
+// Cargar archivos de funcionalidades adicionales
+require_once get_template_directory() . '/inc/ajax-handlers.php';
+require_once get_template_directory() . '/inc/rest-endpoints.php';
