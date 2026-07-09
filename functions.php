@@ -140,7 +140,7 @@ add_action('widgets_init', 'breakdownmusic_theme_widgets_init');
 /**
  * Enqueue scripts and styles.
  */
-/*function breakdownmusic_theme_scripts()
+function breakdownmusic_theme_scripts()
 {
 	wp_enqueue_style('breakdownmusic-theme-style', get_stylesheet_uri(), array(), _S_VERSION);
 	wp_style_add_data('breakdownmusic-theme-style', 'rtl', 'replace');
@@ -151,7 +151,7 @@ add_action('widgets_init', 'breakdownmusic_theme_widgets_init');
 		wp_enqueue_script('comment-reply');
 	}
 }
-add_action('wp_enqueue_scripts', 'breakdownmusic_theme_scripts');*/
+add_action('wp_enqueue_scripts', 'breakdownmusic_theme_scripts');
 
 /**
  * Implement the Custom Header feature.
@@ -207,20 +207,3 @@ function reemplazar_jquery_4()
 	wp_enqueue_script('jquery');
 }
 add_action('wp_enqueue_scripts', 'reemplazar_jquery_4', 999);
-function bd_enqueue_scripts()
-{
-	// jQuery ya se reemplaza en reemplazar_jquery_4, no lo encoles dos veces
-	// wp_enqueue_script('jquery'); // Esto ya lo hace WordPress
-
-	// Bootstrap JS
-	wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js', array(), null, true);
-
-	// Anime.js solo donde se necesita
-	if (is_singular('canciones') || is_tax('genero_cancion')) {
-		wp_enqueue_script('anime-js', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js', array(), null, true);
-	}
-
-	// Custom JS
-	wp_enqueue_script('bd-custom', get_template_directory_uri() . '/assets/librerias/js/js-bdmusic.js', array('jquery'), null, true);
-}
-add_action('wp_enqueue_scripts', 'bd_enqueue_scripts');

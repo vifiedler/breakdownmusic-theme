@@ -5,6 +5,7 @@
  * No usa datos estáticos ni sobrescribe contenido generado por PHP.
  */
 
+/*
 $(function () {
 
     // ============================================================
@@ -53,7 +54,7 @@ $(function () {
          * Actualiza el estado de los botones prev/next de una sección.
          * @param {jQuery} $section - Elemento .bd-section que contiene el carrusel.
          */
-        function bdActualizarBotones($section) {
+        /*function bdActualizarBotones($section) {
             const $wrap = $section.find('.bd-carousel-wrap');
             const $track = $wrap.find('.bd-carousel-track');
             const $cards = $track.find('.bd-card');
@@ -62,14 +63,14 @@ $(function () {
 
             $section.find('.bd-carousel-prev').prop('disabled', page <= 0);
             $section.find('.bd-carousel-next').prop('disabled', page >= totalPages - 1);
-        }
+        }*/
 
         /**
          * Desplaza el carrusel a una página específica.
          * @param {jQuery} $section - Elemento .bd-section.
          * @param {number} nuevaPagina - Índice de página (0‑based).
          */
-        function bdIrAPagina($section, nuevaPagina) {
+       /* function bdIrAPagina($section, nuevaPagina) {
             const $wrap = $section.find('.bd-carousel-wrap');
             const $track = $wrap.find('.bd-carousel-track');
             const $cards = $track.find('.bd-card');
@@ -137,4 +138,4 @@ $(function () {
     // ============================================================
     // FIN DEL ARCHIVO
     // ============================================================
-});
+});*/
