@@ -301,6 +301,7 @@
     align-items: center;
 }
 
+
 @media (max-width: 768px) {
     .bd-sidebar-vertical {
         transform: translateX(-100%);
@@ -309,49 +310,5 @@
     
     .bd-sidebar-vertical.open {
         transform: translateX(0);
-    }
-}
-
-/* ==========================================================================
-   OFFCANVAS NATIVO (reemplaza el sistema manual de open/collapsed + JS)
-   ========================================================================== */
-
-/* Bootstrap ya pone position:fixed en mobile y position:static en lg+
-   gracias a .offcanvas-lg. Solo ajustamos apariencia. */
-.bd-sidebar-vertical.offcanvas {
-    width: var(--bd-sidebar-w);
-    background-color: var(--bd-panel) !important;
-    border-right: 1px solid #1a1a1a;
-    color: var(--bd-text);
-}
-
-/* En desktop (lg+): sidebar estático, debajo de la topbar, altura completa */
-@media (min-width: 992px) {
-    .bd-sidebar-vertical.offcanvas-lg {
-        top: 64px;
-        height: calc(100vh - 64px);
-        padding-bottom: 90px;
-        overflow-y: auto;
-    }
-
-    #bd-content,
-    .site-main {
-        margin-left: var(--bd-sidebar-w);
-    }
-}
-
-/* En mobile/tablet: drawer normal de Bootstrap, sin encoger contenido */
-@media (max-width: 991.98px) {
-    #bd-content,
-    .site-main {
-        margin-left: 0 !important;
-    }
-}
-
-/* Compatibilidad barra admin de WP en desktop */
-@media (min-width: 992px) {
-    .admin-bar .bd-sidebar-vertical.offcanvas-lg {
-        top: calc(64px + 32px);
-        height: calc(100vh - 64px - 32px);
     }
 }
