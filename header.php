@@ -24,7 +24,7 @@
     <?php wp_body_open(); ?>
     <div id="page" class="site">
         <a class="skip-link screen-reader-text"
-            href="#primary"><?php esc_html_e('Skip to content', 'nota3-template'); ?></a>
+            href="#primary"><?php esc_html_e('Skip to content', 'breakdownmusic-theme'); ?></a>
         <header id="masthead" class="fbs__net-navbar navbar navbar-expand-lg dark">
             <div class="container-fluid d-flex align-items-center w-100 px-3">
                 <?php include get_template_directory() . '/assets/templates/navs/nav-desk.php'; ?>
