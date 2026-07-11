@@ -2,7 +2,7 @@
     <div class="bd-sidebar-menu-container">
         <?php
         wp_nav_menu(array(
-            'theme_location' => 'menu-superior',
+            'theme_location' => 'menu-sidebar',
             'menu_class'     => 'bd-vertical-nav-list',
             'container'      => 'false',
             'depth'          => 2,
