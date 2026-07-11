@@ -948,26 +948,34 @@
         });
     }
     // ============================================================
-    // 1. LÓGICA DEL BOTÓN HAMBURGUESA (Solo Móviles)
+    // 1. LÓGICA DEL BOTÓN HAMBURGUESA (Móvil y Tablet)
     // ============================================================
-    $('#bd-burger').on('click', function (e) {
+    var $sidebar = $('#bd-sidebar');
+    
+    // Primero: Nos aseguramos de quitar cualquier control nativo de Bootstrap al botón
+    // por si acaso quedó algún atributo en tu header.php
+    $('#bd-burger').removeAttr('data-bs-toggle').removeAttr('data-bs-target');
+
+    // Evento click de la hamburguesa
+    $('#bd-burger').on('click', function(e) {
         e.preventDefault();
-        var $sidebar = $('#bd-sidebar');
-
-        // Solo ejecutamos la animación si la pantalla es de móvil/tablet (<= 768px)
+        
+        // Solo actuamos en pantallas móviles (<= 768px)
         if (window.innerWidth <= 768) {
-            var isOpening = !$sidebar.hasClass('open');
+            // Solo alternamos la clase. ¡Tu nav.css ya hace el efecto de deslizar!
             $sidebar.toggleClass('open');
-
-            // Animamos la entrada o salida lateral con Anime.js
-            anime({
-                targets: $sidebar[0],
-                translateX: isOpening ? ['-100%', '0%'] : ['0%', '-100%'],
-                duration: 350,
-                easing: 'easeOutCubic'
-            });
         }
-        // Si la pantalla es mayor a 768px (Desktop), no hace nada.
+    });
+
+    // EVENTO RESIZE: La cura para cuando vuelves a escritorio
+    $(window).on('resize', function() {
+        if (window.innerWidth > 768) {
+            // Si agrandamos la pantalla a escritorio:
+            // 1. Quitamos la clase 'open' del móvil
+            $sidebar.removeClass('open');
+            // 2. Limpiamos cualquier rastro de transformaciones en línea que haya dejado JS
+            $sidebar.css('transform', ''); 
+        }
     });
     jQuery(document).ready(function ($) {
 
