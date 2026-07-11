@@ -7,19 +7,47 @@
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
-
+ 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-
+ 
     <?php wp_head(); ?>
 </head>
-
+ 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
     <div id="page" class="site">
         <a class="skip-link screen-reader-text"
             href="#primary"><?php esc_html_e('Skip to content', 'nota3-template'); ?></a>
-
-        <?php include get_template_directory() . '/assets/templates/navs/nav-desk.php'; ?>
+ 
+        <header id="masthead" class="fbs__net-navbar navbar navbar-expand-lg dark">
+            <div class="container-fluid d-flex align-items-center w-100 px-3">
+ 
+                <div class="bd-topbar-left d-flex align-items-center gap-3">
+                    <button class="bd-burger-btn d-lg-none" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#bd-sidebar" aria-controls="bd-sidebar"
+                        aria-label="Alternar menú">
+                        <i class="bi bi-list"></i>
+                    </button>
+ 
+                    <div class="bd-logo-wrap d-flex align-items-center">
+                        <?php
+                        if ( has_custom_logo() ) {
+                            the_custom_logo();
+                        } else {
+                            echo '<a href="' . esc_url(home_url('/')) . '" class="text-white text-decoration-none fw-bold d-flex align-items-center gap-2 m-0 p-0" style="font-size: 1.2rem; font-family: var(--bd-font-logo, sans-serif);">';
+                            echo '<i class="bi bi-play-circle-fill text-danger" style="font-size: 1.5rem;"></i> <span style="line-height: 1;">Breakdown</span>';
+                            echo '</a>';
+                        }
+                        ?>
+                    </div>
+                </div>
+ 
+                <div class="bd-topbar-search">
+                    <?php get_search_form(); ?>
+                </div>
+ 
+            </div>
+        </header><!-- #masthead -->
