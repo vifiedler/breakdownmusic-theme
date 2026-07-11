@@ -219,6 +219,7 @@
     /* Clase que activará el JS en móvil para abrirlo por encima */
     .bd-sidebar-vertical.open {
         transform: translateX(0);
+        z-index: 1;
         box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
     }
 }
