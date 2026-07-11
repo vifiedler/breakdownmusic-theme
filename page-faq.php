@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Términos y Condiciones
+ * Template Name: FAQ
  *
  * @package breakdownmusic-theme
  */
@@ -12,7 +12,7 @@ get_header();
     <?php
     while ( have_posts() ) :
         the_post();
-        get_template_part( 'template-parts/content-page', 'terms' );
+        get_template_part( 'template-parts/content-page', 'faq' );
     endwhile;
     ?>
 </main>

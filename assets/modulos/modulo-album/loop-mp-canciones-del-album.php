@@ -38,27 +38,31 @@ if ($query->have_posts()) :
         if (!$thumb_url) {
             $thumb_url = $album_cover;
         }
+        $title = get_the_title();
 ?>
-        <div class="bd-song-card d-flex align-items-center gap-3 p-2 rounded-3" style="cursor:pointer;">
+        <div class="bd-song-card d-flex align-items-center gap-3 p-2 rounded-3">
             <div class="bd-song-thumb-wrap position-relative flex-shrink-0" style="width:52px;height:52px;">
-                <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="w-100 h-100 rounded" style="object-fit:cover;">
+                <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-100 h-100 rounded-2 object-fit-cover">
                 <button class="bd-play-btn-track position-absolute top-50 start-50 translate-middle bg-danger border-0 rounded-circle d-flex align-items-center justify-content-center" 
-                        data-url="<?php echo esc_url($url_cancion); ?>" 
-                        data-thumb="<?php echo esc_url($thumb_url); ?>" 
+                        data-url="<?php echo esc_url($url_cancion); ?>"
+    data-post-id="<?php echo get_the_ID(); ?>" 
+                        data-thumb="<?php echo esc_url($thumb_url); ?>"
+                        data-title="<?php echo esc_attr($title); ?>"
+                        data-artist="<?php echo esc_attr($artista_nombre); ?>"
                         style="width:32px;height:32px;opacity:0;transition:opacity 0.2s;">
                     <i class="bi bi-play-fill text-white" style="font-size:0.9rem;"></i>
                 </button>
             </div>
-            <div class="bd-song-info flex-grow-1 min-width-0">
-                <p class="bd-song-title fw-semibold text-truncate mb-0">
-                    <a href="<?php the_permalink(); ?>" class="text-white text-decoration-none"><?php the_title(); ?></a>
+            <div class="flex-grow-1 min-width-0">
+                <p class="fw-semibold text-truncate mb-0">
+                    <a href="<?php the_permalink(); ?>" class="text-decoration-none"><?php echo esc_html($title); ?></a>
                 </p>
-                <p class="bd-song-sub text-secondary text-truncate small mb-0"><?php echo esc_html($artista_nombre); ?></p>
+                <p class="text-secondary text-truncate small mb-0"><?php echo esc_html($artista_nombre); ?></p>
             </div>
             <button class="bd-track-like bg-transparent border-0 text-secondary" data-id="<?php the_ID(); ?>">
                 <i class="bi bi-hand-thumbs-up"></i>
             </button>
-            <span class="bd-song-duration text-secondary small"><?php echo esc_html($duracion); ?></span>
+            <span class="text-secondary small"><?php echo esc_html($duracion); ?></span>
         </div>
 <?php
     endwhile;

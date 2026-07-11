@@ -1,10 +1,13 @@
 /* ============================================
-   BREAKDOWN MUSIC - ESTILOS PRINCIPALES
-   Basado en diseño tipo YouTube Music
+   BREAKDOWN MUSIC — estilo principal
+   Bootstrap 5.3 maneja layout y utilidades.
+   Este archivo solo define lo que Bootstrap
+   no puede: variables, colores, componentes
+   propios y comportamientos custom.
    ============================================ */
 
 /* ============================================
-   1. VARIABLES Y RESET
+   VARIABLES
    ============================================ */
 :root {
     --bd-bg: #0f0f0f;
@@ -20,6 +23,9 @@
     --bd-font-logo: 'Frank Ruhl Libre', serif;
 }
 
+/* ============================================
+   BASE — lo que Bootstrap no resetea
+   ============================================ */
 html,
 body {
     background: var(--bd-bg);
@@ -29,23 +35,30 @@ body {
 }
 
 a {
-    text-decoration: none;
     color: inherit;
 }
 
+a:visited {
+    color: var(--bd-text);
+}
+
+a:hover {
+    color: var(--bd-accent);
+}
+
+input[type="search"]:focus {
+    color: #eee;
+}
+
 /* ============================================
-   2. TOPBAR
+   TOPBAR
+   Bootstrap: d-flex align-items-center gap-3 px-3 sticky-top
+   Aquí: colores, altura, z-index
    ============================================ */
 .bd-topbar {
     height: 64px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 1.25rem;
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
     background: var(--bd-bg);
+    border-bottom: 1px solid #222;
     z-index: 50;
 }
 
@@ -55,18 +68,12 @@ a {
     color: var(--bd-text);
     font-size: 1.4rem;
     cursor: pointer;
-    padding: 6px;
 }
 
 .bd-logo {
     font-family: var(--bd-font-logo);
     font-size: 1.3rem;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: var(--bd-text);
     white-space: nowrap;
 }
 
@@ -74,29 +81,41 @@ a {
     color: var(--bd-accent);
 }
 
+.bd-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--bd-accent), #6a1b1b);
+}
+
+/* Bootstrap: rounded-circle flex-shrink-0 en el HTML */
+
+/* Buscador — WordPress genera el HTML del search form */
 .bd-search-wrap {
     flex: 1;
     max-width: 640px;
-    margin: 0 auto;
 }
 
 .bd-search-form {
-    display: flex;
-    align-items: center;
-    background: var(--bd-panel);
-    border: 1px solid #2a2a2a;
-    border-radius: 24px;
-    padding: 6px 8px 6px 18px;
-    position: relative;
+display: flex;
+  align-items: center;
+  background: var(--bd-panel);
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
+  padding: 6px 8px 6px 18px;
+  position: relative;
+}
+
+.bd-search-form:focus-within {
+    border-color: #fff;
 }
 
 .bd-search-form input {
+    flex: 1;
     background: transparent;
     border: none;
     color: var(--bd-text);
-    flex: 1;
-    outline: none;
     font-size: .9rem;
+    outline: none;
 }
 
 .bd-search-form input::placeholder {
@@ -107,8 +126,8 @@ a {
     background: var(--bd-accent);
     border: none;
     color: #fff;
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -116,20 +135,11 @@ a {
     flex-shrink: 0;
 }
 
-#bd-search-results {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    right: 0;
-    background: var(--bd-panel);
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    max-height: 320px;
-    overflow-y: auto;
-    display: none;
-    z-index: 60;
+.bd-search-btn:hover {
+    background: var(--bd-accent-hover);
 }
 
+/* Resultados de búsqueda en vivo */
 #bd-search-results .bd-result-item {
     padding: 10px 16px;
     cursor: pointer;
@@ -137,6 +147,12 @@ a {
     display: flex;
     justify-content: space-between;
     color: var(--bd-text-muted);
+    border-bottom: 1px solid #222;
+    transition: background 0.15s;
+}
+
+#bd-search-results .bd-result-item:last-child {
+    border-bottom: none;
 }
 
 #bd-search-results .bd-result-item:hover {
@@ -144,19 +160,21 @@ a {
     color: var(--bd-text);
 }
 
-.bd-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--bd-accent), #6a1b1b);
-    flex-shrink: 0;
+#bd-search-results .bd-result-item span:last-child {
+    color: var(--bd-text-muted);
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #2a2a2a;
+    padding: 2px 10px;
+    border-radius: 12px;
 }
 
 /* ============================================
-   3. SIDEBAR
+   LAYOUT: SIDEBAR + MAIN
+   Bootstrap: d-flex (en .bd-layout del HTML)
    ============================================ */
 .bd-layout {
-    display: flex;
     min-height: calc(100vh - 64px);
 }
 
@@ -204,9 +222,6 @@ a {
     display: none;
 }
 
-/* ============================================
-   4. MAIN
-   ============================================ */
 .bd-main {
     flex: 1;
     padding: 1.5rem 2rem;
@@ -214,15 +229,10 @@ a {
 }
 
 /* ============================================
-   5. HOME - MOOD PILLS
+   HOME — MOOD PILLS
+   Bootstrap: d-flex flex-wrap gap-2 mb-4 (layout)
+   Aquí: color, forma
    ============================================ */
-.bd-mood-pills {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-}
-
 .bd-pill {
     background: var(--bd-panel);
     border: 1px solid #2a2a2a;
@@ -242,17 +252,12 @@ a {
 }
 
 /* ============================================
-   6. HOME - SECCIONES Y CARRUSEL
+   HOME — SECCIONES Y HEADERS
+   Bootstrap: mb-4 (bd-section), d-flex justify-content-between align-items-start mb-3 (bd-section-head)
+   Aquí: tipografía y controles
    ============================================ */
 .bd-section {
     margin-bottom: 2.5rem;
-}
-
-.bd-section-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: .75rem;
 }
 
 .bd-section-title {
@@ -304,12 +309,8 @@ a {
 }
 
 /* ============================================
-   7. HOME - CARRUSEL Y CARDS
+   CARRUSEL HORIZONTAL
    ============================================ */
-.bd-carousel-wrap {
-    position: relative;
-}
-
 .bd-carousel-track {
     display: flex;
     gap: 16px;
@@ -324,7 +325,6 @@ a {
 }
 
 .bd-carousel-btn {
-    flex-shrink: 0;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -336,6 +336,7 @@ a {
     justify-content: center;
     cursor: pointer;
     font-size: .9rem;
+    flex-shrink: 0;
 }
 
 .bd-carousel-btn:hover {
@@ -348,11 +349,13 @@ a {
     opacity: .3;
     cursor: default;
     background: transparent;
-    color: var(--bd-text);
-    border-color: #444;
 }
 
-/* --- Cards --- */
+/* ============================================
+   CARDS (carrusel)
+   Bootstrap: text-truncate (título/subtítulo), object-fit-cover img
+   Aquí: tamaño fijo, hover, play btn
+   ============================================ */
 .bd-card {
     flex: 0 0 200px;
     min-width: 0;
@@ -383,27 +386,25 @@ a {
     opacity: .75;
 }
 
-.bd-card-title,
-.bd-card-sub {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
-    margin: 4px 0;
-}
-
 .bd-card-title {
     font-size: .88rem;
     font-weight: 600;
-    margin-top: 8px;
+    margin: 8px 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bd-card-sub {
     font-size: .76rem;
     color: var(--bd-text-muted);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* --- Botón de play (hover) --- */
+/* Botón play hover sobre card */
 .bd-play-btn {
     position: absolute;
     bottom: 10px;
@@ -435,78 +436,14 @@ a {
 }
 
 /* ============================================
-   8. MODAL DEL REPRODUCTOR
+   SINGLE (ÁLBUM / CANCIÓN)
+   Bootstrap: row g-4 (layout), img-fluid rounded-3 shadow (portada)
+   Aquí: sticky, scroll, tipografía
    ============================================ */
-.modal-content.bg-dark {
-    background: var(--bd-bg) !important;
-}
-
-#bdMusicModal .modal-header {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #222;
-}
-
-#bdMusicModal .modal-title {
-    font-family: var(--bd-font);
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-#bdMusicModal .btn-close-white {
-    filter: invert(1);
-}
-
-/* ============================================
-   9. ANIMACIONES
-   ============================================ */
-.fade-in-up {
-    animation: fadeInUp 0.2s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============================================
-   10. SINGLE (ÁLBUM)
-   ============================================ */
-.bd-single-layout {
-    display: flex;
-    gap: 2.5rem;
-    align-items: flex-start;
-}
-
 .bd-single-info {
     flex: 0 0 340px;
     position: sticky;
     top: 1.5rem;
-}
-
-.bd-single-breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--bd-text-muted);
-    font-size: .85rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    text-decoration: none;
-}
-
-.bd-single-breadcrumb:hover {
-    color: var(--bd-text);
-}
-
-.bd-single-breadcrumb i {
-    color: var(--bd-accent);
 }
 
 .bd-single-cover {
@@ -525,7 +462,6 @@ a {
 }
 
 .bd-single-title {
-    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 1.7rem;
     line-height: 1.15;
@@ -553,12 +489,26 @@ a {
     overflow: hidden;
 }
 
-.bd-single-actions {
+.bd-single-breadcrumb {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    color: var(--bd-text-muted);
+    font-size: .85rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-decoration: none;
 }
 
+.bd-single-breadcrumb:hover {
+    color: var(--bd-text);
+}
+
+.bd-single-breadcrumb i {
+    color: var(--bd-accent);
+}
+
+/* Botones de acción */
 .bd-action-btn {
     width: 42px;
     height: 42px;
@@ -576,23 +526,11 @@ a {
     background: #333;
 }
 
-.bd-action-btn.bd-play-main {
-    width: 54px;
-    height: 54px;
-    background: var(--bd-text);
-    color: var(--bd-bg);
-    font-size: 1.4rem;
-}
-
-.bd-action-btn.bd-play-main:hover {
-    background: var(--bd-accent);
-    color: #fff;
-}
-
 .bd-action-btn.active {
     color: var(--bd-accent);
 }
 
+/* Tracklist scroll */
 .bd-single-tracklist {
     flex: 1;
     min-width: 0;
@@ -610,6 +548,7 @@ a {
     border-radius: 3px;
 }
 
+/* Filas de track */
 .bd-track-row {
     display: flex;
     align-items: center;
@@ -631,31 +570,19 @@ a {
     flex-shrink: 0;
 }
 
-.bd-track-row:hover .bd-track-num {
-    color: var(--bd-text);
-}
-
-.bd-track-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.bd-track-title {
-    font-size: .92rem;
-    font-weight: 600;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-track-sub {
-    font-size: .76rem;
+.bd-track-num .bd-play-btn-track {
+    background: none;
+    border: none;
     color: var(--bd-text-muted);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: .9rem;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.bd-track-num .bd-play-btn-track:hover,
+.bd-track-row:hover .bd-track-num .bd-play-btn-track {
+    color: var(--bd-text);
 }
 
 .bd-track-like {
@@ -677,36 +604,36 @@ a {
     color: var(--bd-accent);
 }
 
-.bd-track-duration {
-    color: var(--bd-text-muted);
-    font-size: .85rem;
-    flex-shrink: 0;
-    width: 44px;
-    text-align: right;
-}
-
 /* ============================================
-   11. ARCHIVE (GÉNERO)
+   SONG CARD (grid en álbum / archive)
+   Bootstrap: d-flex align-items-center gap-3 p-2 rounded-3
+   Aquí: hover, play btn
    ============================================ */
-.bd-archive-title {
-    font-family: var(--bd-font);
-    font-weight: 800;
-    font-size: 2.6rem;
-    letter-spacing: -1px;
-    margin: 0 0 2rem;
+.bd-song-card {
+    transition: background 0.15s;
 }
 
-.bd-archive-section-label {
-    font-family: var(--bd-font);
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin: 0;
+.bd-song-card:hover {
+    background: #1a1a1a;
 }
 
+.bd-song-card:hover .bd-play-btn-track {
+    opacity: 1 !important;
+}
+
+.bd-song-thumb-wrap .bd-play-btn-track {
+    opacity: 0;
+}
+
+.bd-song-thumb-wrap:hover .bd-play-btn-track {
+    opacity: 1;
+}
+
+/* Grid de canciones en archive/álbum */
 .bd-song-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: .4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
 }
 
 .bd-song-loader {
@@ -733,345 +660,15 @@ a {
 }
 
 /* ============================================
-   12. SEARCH (BÚSQUEDA)
-   ============================================ */
-.bd-search-page-input-wrap {
-    max-width: 900px;
-    margin: 0 auto 1.5rem;
-}
-
-.bd-search-page-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--bd-panel);
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 12px 16px;
-}
-
-.bd-search-page-form i.bi-search {
-    color: var(--bd-text-muted);
-    font-size: 1.1rem;
-}
-
-.bd-search-page-form input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--bd-text);
-    font-size: 1.05rem;
-    outline: none;
-}
-
-.bd-search-page-clear {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: 1.2rem;
-    display: none;
-}
-
-.bd-search-page-clear:hover {
-    color: var(--bd-text);
-}
-
-.bd-search-tabs {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    gap: 1.75rem;
-    border-bottom: 1px solid #262626;
-    margin-bottom: 1.25rem;
-}
-
-.bd-search-tab {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: .8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 0 0 12px;
-    border-bottom: 2px solid transparent;
-}
-
-.bd-search-tab.active {
-    color: var(--bd-text);
-    border-color: var(--bd-text);
-}
-
-.bd-search-tab:hover {
-    color: var(--bd-text);
-}
-
-.bd-search-filters {
-    max-width: 900px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.bd-search-filter {
-    background: var(--bd-panel);
-    border: 1px solid #2a2a2a;
-    color: var(--bd-text);
-    padding: 7px 16px;
-    border-radius: 16px;
-    font-size: .78rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.bd-search-filter:hover,
-.bd-search-filter.active {
-    background: #2a2a2a;
-    border-color: #444;
-}
-
-.bd-search-radio-card {
-    max-width: 900px;
-    margin: 0 auto 1.75rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    background: linear-gradient(90deg, #1c1c2a, #14141a);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-}
-
-.bd-search-radio-thumb {
-    width: 64px;
-    height: 64px;
-    border-radius: 6px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.bd-search-radio-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.bd-search-radio-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin: 0 0 2px;
-}
-
-.bd-search-radio-sub {
-    font-size: .82rem;
-    color: var(--bd-text-muted);
-    margin: 0;
-}
-
-.bd-search-radio-play {
-    background: var(--bd-text);
-    color: var(--bd-bg);
-    border: none;
-    border-radius: 20px;
-    padding: 9px 22px;
-    font-weight: 700;
-    font-size: .85rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-}
-
-.bd-search-radio-play:hover {
-    background: var(--bd-accent);
-    color: #fff;
-}
-
-.bd-search-radio-more {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.bd-search-radio-more:hover {
-    color: var(--bd-text);
-}
-
-.bd-search-results-list {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.bd-search-result-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: .65rem .25rem;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-}
-
-.bd-search-result-row:hover {
-    background: #161616;
-    color: inherit;
-}
-
-.bd-search-result-thumb {
-    width: 52px;
-    height: 52px;
-    object-fit: cover;
-    flex-shrink: 0;
-    border-radius: 6px;
-}
-
-.bd-search-result-thumb.bd-round {
-    border-radius: 50%;
-}
-
-.bd-search-result-info {
-    min-width: 0;
-}
-
-.bd-search-result-title {
-    font-size: .92rem;
-    font-weight: 700;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-search-result-sub {
-    font-size: .78rem;
-    color: var(--bd-text-muted);
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* ============================================
-   13. TERMS (TÉRMINOS Y FAQ)
-   ============================================ */
-.bd-legal-wrap {
-    max-width: 760px;
-    margin: 0 auto;
-}
-
-.bd-legal-title {
-    font-family: var(--bd-font);
-    font-weight: 800;
-    font-size: 2.2rem;
-    letter-spacing: -1px;
-    margin-bottom: .25rem;
-}
-
-.bd-legal-updated {
-    color: var(--bd-text-muted);
-    font-size: .82rem;
-    margin-bottom: 2rem;
-}
-
-.bd-legal-section {
-    margin-bottom: 1.75rem;
-}
-
-.bd-legal-heading {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: .5rem;
-}
-
-.bd-legal-text {
-    color: var(--bd-text-muted);
-    font-size: .9rem;
-    line-height: 1.7;
-    margin: 0;
-}
-
-.bd-faq-title {
-    font-family: var(--bd-font);
-    font-weight: 800;
-    font-size: 1.6rem;
-    margin: 2.5rem 0 1.25rem;
-}
-
-.bd-faq-item {
-    border-bottom: 1px solid #262626;
-}
-
-.bd-faq-question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem .25rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    width: 100%;
-    text-align: left;
-    color: var(--bd-text);
-}
-
-.bd-faq-question span {
-    font-size: .95rem;
-    font-weight: 600;
-}
-
-.bd-faq-question i {
-    color: var(--bd-text-muted);
-    font-size: .9rem;
-    flex-shrink: 0;
-    margin-left: 1rem;
-    transition: transform .25s ease;
-}
-
-.bd-faq-item.open .bd-faq-question i {
-    transform: rotate(180deg);
-    color: var(--bd-accent);
-}
-
-.bd-faq-answer {
-    display: none;
-    padding: 0 .25rem 1.1rem;
-    color: var(--bd-text-muted);
-    font-size: .87rem;
-    line-height: 1.65;
-}
-
-/* ============================================
-   14. LIBRARY (BIBLIOTECA)
-   ============================================ */
-.bd-library-title {
-    font-family: var(--bd-font);
-    font-weight: 800;
-    font-size: 2.2rem;
-    letter-spacing: -1px;
-    margin: 0 0 1.75rem;
-}
-
-.bd-library-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 1.5rem 1.25rem;
-}
-
-/* ============================================
-   15. ARTIST (PÁGINA DE ARTISTA)
+   ARTIST HERO
    ============================================ */
 .bd-artist-hero {
-    position: relative;
     min-height: 420px;
     display: flex;
     align-items: flex-end;
     background-size: cover;
     background-position: center;
-    border-radius: 0;
     margin: -1.5rem -2rem 2rem;
-    padding: 0;
 }
 
 .bd-artist-hero-overlay {
@@ -1081,7 +678,6 @@ a {
 }
 
 .bd-artist-name {
-    font-family: var(--bd-font);
     font-weight: 800;
     font-size: 3rem;
     letter-spacing: -1.5px;
@@ -1096,7 +692,6 @@ a {
 }
 
 .bd-artist-bio {
-    max-width: 760px;
     color: #ddd;
     font-size: .9rem;
     line-height: 1.6;
@@ -1127,12 +722,9 @@ a {
     color: var(--bd-text);
 }
 
-.bd-artist-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
+/* Botones del artista
+   Bootstrap: btn btn-outline-light (Aleatorio/Mix), gap-2 flex-wrap
+   Aquí: pill y subscribe */
 .bd-btn-pill {
     background: #242424;
     border: 1px solid #333;
@@ -1160,79 +752,18 @@ a {
     font-weight: 700;
 }
 
-.bd-btn-subscribe:hover {
-    background: var(--bd-accent);
-    color: #fff;
-}
-
+.bd-btn-subscribe:hover,
 .bd-btn-subscribe.active {
     background: var(--bd-accent);
     color: #fff;
 }
 
-.bd-artist-songs-list {
-    max-width: 900px;
-}
-
-.bd-artist-song-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: .6rem .25rem;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-}
-
+/* Filas de canciones del artista
+   Bootstrap: d-flex align-items-center gap-3 p-2 rounded-3 (en el HTML)
+   Aquí: hover, like */
 .bd-artist-song-row:hover {
     background: #161616;
     color: inherit;
-}
-
-.bd-artist-song-num {
-    width: 20px;
-    text-align: center;
-    color: var(--bd-text-muted);
-    font-size: .85rem;
-    flex-shrink: 0;
-}
-
-.bd-artist-song-thumb {
-    width: 42px;
-    height: 42px;
-    border-radius: 4px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.bd-artist-song-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.bd-artist-song-title {
-    font-size: .9rem;
-    font-weight: 700;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-artist-song-sub {
-    font-size: .78rem;
-    color: var(--bd-text-muted);
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-artist-song-plays {
-    color: var(--bd-text-muted);
-    font-size: .82rem;
-    flex-shrink: 0;
 }
 
 .bd-artist-song-like {
@@ -1255,145 +786,42 @@ a {
 }
 
 /* ============================================
-   16. FOOTER
+   FAQ — Bootstrap Accordion (JS nativo de BS)
+   Solo override de colores
    ============================================ */
-.bd-footer {
-    border-top: 1px solid #1e1e1e;
-    margin-top: 3rem;
-    padding: 1.5rem 0 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    font-size: .78rem;
-    color: #555;
+.accordion-item {
+    background: var(--bd-card-bg);
+    border: 1px solid #2a2a2a;
 }
 
-.bd-footer a {
-    color: #777;
-    text-decoration: none;
+.accordion-item:hover {
+    border-color: var(--bd-accent);
 }
 
-.bd-footer a:hover {
+.accordion-button {
     color: var(--bd-text);
+    background: var(--bd-card-bg);
 }
 
-/* ============================================
-   17. MEDIA QUERIES
-   ============================================ */
-
-/* Tablets y móviles grandes */
-@media (max-width: 991px) {
-    .bd-sidebar {
-        position: fixed;
-        left: 0;
-        top: 64px;
-        bottom: 0;
-        z-index: 80;
-        width: 0;
-        padding: 1.25rem 0;
-    }
-
-    .bd-sidebar.open {
-        width: 220px;
-        padding: 1.25rem .5rem;
-    }
-
-    .bd-main {
-        padding: 1.25rem 1rem;
-    }
-
-    .bd-search-wrap {
-        max-width: none;
-    }
-
-    .bd-logo span {
-        display: none;
-    }
+.accordion-button:not(.collapsed) {
+    color: var(--bd-text);
+    background: var(--bd-card-bg);
+    box-shadow: none;
 }
 
-/* Móviles */
-@media (max-width: 768px) {
-    .bd-section-title {
-        font-size: 1.4rem;
-    }
-
-    .bd-card {
-        flex: 0 0 150px;
-    }
-
-    .bd-mood-pills {
-        gap: 6px;
-    }
-
-    .bd-pill {
-        font-size: .7rem;
-        padding: 6px 12px;
-    }
-
-    .bd-artist-hero {
-        margin: -1.25rem -1rem 1.5rem;
-        min-height: 300px;
-    }
-
-    .bd-artist-name {
-        font-size: 2rem;
-    }
-
-    .bd-single-layout {
-        flex-direction: column;
-    }
-
-    .bd-single-info {
-        position: static;
-        flex: 1 1 auto;
-        width: 100%;
-    }
-
-    .bd-single-tracklist {
-        max-height: none;
-        overflow-y: visible;
-    }
-
-    .bd-song-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .bd-search-filters {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 4px;
-    }
-
-    .bd-search-radio-card {
-        flex-wrap: wrap;
-    }
+.accordion-button:focus {
+    box-shadow: none;
 }
 
-/* Móviles muy pequeños */
-@media (max-width: 576px) {
-    .bd-card {
-        flex: 0 0 130px;
-    }
+.accordion-button::after {
+    filter: invert(1) brightness(0.8);
+}
 
-    .bd-song-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .bd-section-controls {
-        gap: 8px;
-    }
-
-    .bd-more-btn {
-        padding: 4px 12px;
-        font-size: .7rem;
-    }
-
-    .bd-carousel-btn {
-        width: 30px;
-        height: 30px;
-        font-size: .75rem;
-    }
+.accordion-body {
+    background: var(--bd-panel);
+    border-top: 1px solid #2a2a2a;
+    color: var(--bd-text-muted);
+    line-height: 1.7;
 }
 
 /* ============================================
@@ -1401,7 +829,6 @@ a {
    ============================================ */
 .bd-player-bar {
     display: none;
-    /* Oculto por defecto */
     position: fixed;
     bottom: 0;
     left: 0;
@@ -1410,33 +837,14 @@ a {
     background: var(--bd-panel);
     border-top: 1px solid #2a2a2a;
     padding: 10px 1rem;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, .8);
     height: 80px;
-    transition: transform 0.3s ease, height 0.3s ease;
+    transition: height 0.3s ease;
+    z-index: 1060;
 }
 
 .bd-player-bar.visible {
     display: block;
-    /* o flex, según tu estructura */
-}
-
-.bd-player-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    height: 100%;
-    position: relative;
-}
-
-/* Info canción */
-.bd-player-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 180px;
-    flex: 0 0 auto;
 }
 
 .bd-player-thumb {
@@ -1446,73 +854,6 @@ a {
     object-fit: cover;
     background: #222;
     flex-shrink: 0;
-}
-
-.bd-player-meta {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    min-width: 0;
-}
-
-.bd-player-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--bd-text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bd-player-artist {
-    font-size: 0.75rem;
-    color: var(--bd-text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Controles */
-.bd-player-controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
-.bd-player-btn {
-    background: none;
-    border: none;
-    color: var(--bd-text);
-    font-size: 1.5rem;
-    padding: 4px 8px;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.bd-player-btn:hover {
-    color: var(--bd-accent);
-}
-
-.bd-player-btn:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-/* Barra de progreso */
-.bd-player-progress-wrap {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-}
-
-.bd-player-time {
-    font-size: 0.7rem;
-    color: var(--bd-text-muted);
-    font-variant-numeric: tabular-nums;
-    min-width: 40px;
 }
 
 .bd-player-progress {
@@ -1541,22 +882,13 @@ a {
     background: #fff;
 }
 
-/* Botón minimizar */
-.bd-player-toggle {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 8px;
+.bd-player-bar.minimized {
+    height: 60px;
 }
 
-.bd-player-toggle:hover {
-    color: var(--bd-text);
+.bd-player-bar.minimized .bd-player-progress,
+.bd-player-bar.minimized .bd-player-thumb {
+    display: none;
 }
 
 .bd-player-toggle .bi-chevron-down {
@@ -1564,142 +896,176 @@ a {
     transition: transform 0.3s ease;
 }
 
-/* Estado minimizado (solo si visible) */
-.bd-player-bar.minimized {
-    height: 60px;
-}
-
-.bd-player-bar.minimized .bd-player-progress-wrap,
-.bd-player-bar.minimized .bd-player-controls {
-    display: none;
-}
-
-.bd-player-bar.minimized .bd-player-info {
-    min-width: auto;
-}
-
-.bd-player-bar.minimized .bd-player-thumb {
-    width: 40px;
-    height: 40px;
-}
-
-.bd-player-bar.minimized .bd-player-meta {
-    display: none;
-}
-
 .bd-player-bar.minimized .bd-player-toggle .bi-chevron-down {
     transform: rotate(180deg);
 }
 
-/* Estado vacío (sin canción) - solo deshabilita controles, no oculta */
-.bd-player-bar.empty .bd-player-controls,
-.bd-player-bar.empty .bd-player-progress-wrap {
-    opacity: 0.3;
+.bd-player-bar.empty .bd-player-progress {
+    opacity: .3;
     pointer-events: none;
 }
 
-/* Responsive (ajustes) */
-@media (max-width: 768px) {
-    .bd-player-bar {
-        height: 70px;
-        padding: 6px 0.5rem;
+/* ============================================
+   FOOTER
+   Bootstrap: d-flex justify-content-center gap-4 flex-wrap (layout)
+   Aquí: color, borde
+   ============================================ */
+.bd-footer {
+    border-top: 1px solid #1e1e1e;
+    margin-top: 3rem;
+    padding: 1.5rem 0 2rem;
+    font-size: .78rem;
+    color: #555;
+}
+
+.bd-footer a {
+    color: #777;
+}
+
+.bd-footer a:hover {
+    color: var(--bd-text);
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+.fade-in-up {
+    animation: fadeInUp 0.2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
 
-    .bd-player-bar.minimized {
-        height: 50px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 991px) {
+    .bd-sidebar {
+        position: fixed;
+        left: 0;
+        top: 64px;
+        bottom: 0;
+        z-index: 80;
+        width: 0;
+        padding: 0;
+    }
+
+    .bd-sidebar.open {
+        width: 220px;
+        padding: 1.25rem .5rem;
+    }
+
+    .bd-search-wrap {
+        max-width: none;
+    }
+
+    .bd-logo span {
+        display: none;
+    }
+
+    .bd-main {
+        padding: 1.25rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .bd-section-title {
+        font-size: 1.4rem;
+    }
+
+    .bd-card {
+        flex: 0 0 150px;
+    }
+
+    .bd-pill {
+        font-size: .7rem;
+        padding: 6px 12px;
+    }
+
+    .bd-artist-hero {
+        margin: -1.25rem -1rem 1.5rem;
+        min-height: 300px;
+    }
+
+    .bd-artist-name {
+        font-size: 2rem;
+    }
+
+    .bd-single-info {
+        position: static;
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .bd-single-tracklist {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .bd-search-filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+
+    .bd-player-bar {
+        height: 70px;
+        padding: 6px .5rem;
     }
 
     .bd-player-thumb {
         width: 44px;
         height: 44px;
     }
-
-    .bd-player-bar.minimized .bd-player-thumb {
-        width: 36px;
-        height: 36px;
-    }
-
-    .bd-player-title {
-        font-size: 0.75rem;
-    }
-
-    .bd-player-artist {
-        font-size: 0.65rem;
-    }
-
-    .bd-player-btn {
-        font-size: 1.2rem;
-    }
-
-    .bd-player-info {
-        min-width: 120px;
-    }
-
-    .bd-player-time {
-        font-size: 0.6rem;
-        min-width: 30px;
-    }
 }
 
 @media (max-width: 576px) {
-    .bd-player-info {
-        min-width: 80px;
+    .bd-card {
+        flex: 0 0 130px;
+    }
+
+    .bd-more-btn {
+        padding: 4px 12px;
+        font-size: .7rem;
+    }
+
+    .bd-carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: .75rem;
+    }
+
+    .bd-player-bar {
+        height: 64px;
     }
 
     .bd-player-thumb {
-        width: 36px;
-        height: 36px;
-    }
-
-    .bd-player-meta {
         display: none;
     }
 }
 
-/* Botón de play en tracks relacionados */
-.bd-track-num .bd-play-btn-track {
-    background: none;
-    border: none;
-    color: var(--bd-text-muted);
-    font-size: 0.9rem;
-    padding: 0;
-    cursor: pointer;
-    transition: color 0.2s;
+#bdSongModal .modal-dialog {
+    max-width: 92%;
+    width: 92%;
+    height: 90vh;
+    margin: 5vh auto;
 }
 
-.bd-track-num .bd-play-btn-track:hover {
-    color: var(--bd-accent);
+#bdSongModal .modal-content {
+    height: 100%;
+    border-radius: 12px;
 }
 
-.bd-track-row:hover .bd-track-num .bd-play-btn-track {
-    color: var(--bd-text);
-}
-
-/* ============================================
-   CANCIONES DEL GÉNERO (grid en single de álbum)
-   ============================================ */
-.bd-song-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.bd-song-card {
-    transition: background 0.15s;
-}
-
-.bd-song-card:hover {
-    background: #1a1a1a;
-}
-
-.bd-song-card:hover .bd-play-btn-track {
-    opacity: 1 !important;
-}
-
-.bd-song-thumb-wrap .bd-play-btn-track {
-    opacity: 0;
-}
-
-.bd-song-thumb-wrap:hover .bd-play-btn-track {
-    opacity: 1;
+#bdSongModal .modal-body {
+    overflow-y: auto;
+    padding: 2rem;
 }

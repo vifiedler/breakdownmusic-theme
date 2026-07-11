@@ -2,51 +2,86 @@
 /**
  * The template for displaying search results pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
  * @package breakdownmusic-theme
  */
 
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="bd-content" class="site-main">
+    <div class="container-fluid py-4">
 
-		<?php if ( have_posts() ) : ?>
+        <!-- Título de búsqueda -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="bd-search-title h2 fw-bold">
+                    <?php
+                    printf(
+                        /* translators: %s: search query */
+                        esc_html__('Resultados de búsqueda para: "%s"', 'breakdownmusic-theme'),
+                        '<span class="text-danger">' . get_search_query() . '</span>'
+                    );
+                    ?>
+                </h1>
+            </div>
+        </div>
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'breakdownmusic-theme' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
+        <?php if (have_posts()) : ?>
+            <!-- Grid de resultados -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <?php while (have_posts()) : the_post(); ?>
+                    <div class="col">
+                        <?php
+                        // Usar el mismo template que en archive (content-*.php)
+                        // Pero como tenemos diferentes post types, usamos un template unificado
+                        get_template_part('template-parts/content', 'search-card');
+                        ?>
+                    </div>
+                <?php endwhile; ?>
+            </div>
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+            <!-- Paginación -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <?php
+                    the_posts_pagination(array(
+                        'mid_size'  => 2,
+                        'prev_text' => '<i class="bi bi-chevron-left"></i>',
+                        'next_text' => '<i class="bi bi-chevron-right"></i>',
+                        'class'     => 'pagination justify-content-center',
+                    ));
+                    ?>
+                </div>
+            </div>
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+        <?php else : ?>
+            <!-- Sin resultados -->
+            <div class="row">
+                <div class="col-12 text-center py-5">
+                    <div class="bd-search-empty">
+                        <i class="bi bi-music-note-beamed display-1 text-secondary mb-3 d-block"></i>
+                        <h3 class="h4"><?php esc_html_e('No se encontraron resultados', 'breakdownmusic-theme'); ?></h3>
+                        <p class="text-muted">
+                            <?php esc_html_e('Intenta con otras palabras clave o revisa la ortografía.', 'breakdownmusic-theme'); ?>
+                        </p>
+                        <a href="<?php echo home_url('/'); ?>" class="btn btn-outline-light mt-2">
+                            <i class="bi bi-house-fill"></i> <?php esc_html_e('Volver al inicio', 'breakdownmusic-theme'); ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-			endwhile;
+            <!-- Alerta via JS (como está) -->
+            <script>
+                (function() {
+                    var query = '<?php echo esc_js(get_search_query()); ?>';
+                    alert('Lo sentimos, "' + query + '" no se encuentra disponible.');
+                })();
+            </script>
+        <?php endif; ?>
 
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
+    </div>
+</main>
 
 <?php
 get_sidebar();

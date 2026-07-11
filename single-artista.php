@@ -10,15 +10,15 @@
 get_header();
 ?>
 
-<main id="primary" class="site-main">
+<main id="bd-content" class="site-main">
 	<?php
-	while (have_posts()):
+	while (have_posts()) :
 		the_post();
 		get_template_part('template-parts/content-single', 'artista');
-	endwhile; // End of the loop.
+	endwhile;
 	?>
 </main>
 
 <?php
-get_sidebar();
+
 get_footer();

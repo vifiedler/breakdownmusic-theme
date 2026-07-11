@@ -6,7 +6,6 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package breakdownmusic-theme
  */
 
 ?>
@@ -14,55 +13,34 @@
 <html <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<?php wp_head(); ?>
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-	<?php wp_body_open(); ?>
-	<div id="page" class="site">
-		<a class="skip-link screen-reader-text"
-			href="#primary"><?php esc_html_e('Skip to content', 'breakdownmusic-theme'); ?></a>
-
-		<header id="masthead" class="site-header">
-			<div class="site-branding">
-				<?php
-				the_custom_logo();
-				if (is_front_page() && is_home()):
-					?>
-					<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>"
-							rel="home"><?php bloginfo('name'); ?></a></h1>
-					<?php
-				else:
-					?>
-					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>"
-							rel="home"><?php bloginfo('name'); ?></a></p>
-					<?php
-				endif;
-				$breakdownmusic_theme_description = get_bloginfo('description', 'display');
-				if ($breakdownmusic_theme_description || is_customize_preview()):
-					?>
-					<p class="site-description">
-						<?php echo $breakdownmusic_theme_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</p>
-				<?php endif; ?>
-			</div><!-- .site-branding -->
-
-			<nav id="site-navigation" class="main-navigation">
-				<button class="menu-toggle" aria-controls="primary-menu"
-					aria-expanded="false"><?php esc_html_e('Primary Menu', 'breakdownmusic-theme'); ?></button>
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'menu-1',
-						'menu_id' => 'primary-menu',
-					)
-				);
-				?>
-			</nav><!-- #site-navigation -->
-		</header><!-- #masthead -->
-		<main id="primary" class="site-main">
-			<div id="bd-content">
+    <?php wp_body_open(); ?>
+    <div id="page" class="site">
+        <a class="skip-link screen-reader-text"
+            href="#primary"><?php esc_html_e('Skip to content', 'nota3-template'); ?></a>
+        <header id="masthead" class="fbs__net-navbar navbar navbar-expand-lg dark">
+            <div class="container-fluid d-flex align-items-center w-100 px-3">
+                <?php include get_template_directory() . '/assets/templates/navs/nav-desk.php'; ?>
+            </div>
+        </header>
+        <nav id="bd-sidebar" class="bd-sidebar-vertical">
+            <div class="bd-sidebar-menu-container">
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'menu-superior',
+                    'menu_class' => 'bd-vertical-nav-list',
+                    'container' => 'false',
+                    'depth' => 2,
+                    'walker' => new bootstrap_5_wp_nav_menu_walker(),
+                    'fallback_cb' => 'bootstrap_5_wp_nav_menu_walker::fallback',
+                ));
+                ?>
+            </div>
+        </nav>

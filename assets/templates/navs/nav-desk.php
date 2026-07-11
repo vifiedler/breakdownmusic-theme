@@ -1,26 +1,29 @@
-<nav class="navbar navbar-expand-lg fbs__net-navbar">
-    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap">
-        <div class="navbar-brand-wrap">
-            <?php the_custom_logo(); ?>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'menu-superior',
-                'menu_class' => 'navbar-nav mb-2 mb-lg-0',
-                'container' => 'false',
-                'depth' => 2,
-                'walker' => new bootstrap_5_wp_nav_menu_walker(),
-                'fallback_cb' => 'bootstrap_5_wp_nav_menu_walker::fallback',
-            ));
-            ?>
-            <div class="nav-search-wrap ms-lg-auto">
-                <?php get_search_form(); ?>
-            </div>
-        </div>
+<?php
+/**
+ * Navigation Template - Topbar Elements Only
+ * @package breakdownmusic-theme
+ */
+?>
+
+<div class="bd-topbar-left d-flex align-items-center gap-3">
+    <button id="bd-burger" class="bd-burger-btn" aria-label="Alternar menú">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div class="bd-logo-wrap d-flex align-items-center">
+        <?php 
+        if ( has_custom_logo() ) {
+            the_custom_logo(); 
+        } else {
+            // Logo por defecto forzado a flex para evitar que el ícono quede encima del texto
+            echo '<a href="' . esc_url(home_url('/')) . '" class="text-white text-decoration-none fw-bold d-flex align-items-center gap-2 m-0 p-0" style="font-size: 1.2rem; font-family: var(--bd-font-logo, sans-serif);">';
+            echo '<i class="bi bi-play-circle-fill text-danger" style="font-size: 1.5rem;"></i> <span style="line-height: 1;">Breakdown</span>';
+            echo '</a>';
+        }
+        ?>
     </div>
-</nav>
+</div>
+
+<div class="bd-topbar-search">
+    <?php get_search_form(); ?>
+</div>

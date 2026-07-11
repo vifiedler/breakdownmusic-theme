@@ -15,7 +15,7 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="bd-content" class="site-main">
 
 		<?php
 		while ( have_posts() ) :

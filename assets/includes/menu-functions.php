@@ -78,7 +78,7 @@ add_action('init', 'menu_mobile');
 class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_Menu
 {
 
-    private $dropdown_icon = '<i class="bi bi-chevron-down"></i>';
+    private $dropdown_icon = '<i class=""></i>';
 
     public function start_lvl(&$output, $depth = 0, $args = null)
     {
