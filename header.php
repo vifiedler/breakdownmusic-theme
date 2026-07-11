@@ -2,12 +2,8 @@
 /**
  * The header for our theme
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
+ * @package breakdownmusic-theme
  */
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -25,22 +21,5 @@
     <div id="page" class="site">
         <a class="skip-link screen-reader-text"
             href="#primary"><?php esc_html_e('Skip to content', 'nota3-template'); ?></a>
-        <header id="masthead" class="fbs__net-navbar navbar navbar-expand-lg dark">
-            <div class="container-fluid d-flex align-items-center w-100 px-3">
-                <?php include get_template_directory() . '/assets/templates/navs/nav-desk.php'; ?>
-            </div>
-        </header>
-        <nav id="bd-sidebar" class="bd-sidebar-vertical">
-            <div class="bd-sidebar-menu-container">
-                <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'menu-superior',
-                    'menu_class' => 'bd-vertical-nav-list',
-                    'container' => 'false',
-                    'depth' => 2,
-                    'walker' => new bootstrap_5_wp_nav_menu_walker(),
-                    'fallback_cb' => 'bootstrap_5_wp_nav_menu_walker::fallback',
-                ));
-                ?>
-            </div>
-        </nav>
+
+        <?php include get_template_directory() . '/assets/templates/navs/nav-desk.php'; ?>
