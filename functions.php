@@ -207,14 +207,3 @@ function reemplazar_jquery_4()
 	wp_enqueue_script('jquery');
 }
 add_action('wp_enqueue_scripts', 'reemplazar_jquery_4', 999);
-
-function bd_enqueue_scripts() {
-    wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/librerias/js/js-bdmusic.js', array('jquery'), '1.0', true);
-    wp_localize_script('custom-js', 'bd_ajax', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'rest_url' => get_rest_url(),
-        'nonce'    => wp_create_nonce('bd_nonce'),
-        'search_url' => home_url('/')
-    ));
-}
-add_action('wp_enqueue_scripts', 'bd_enqueue_scripts');
