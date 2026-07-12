@@ -5,10 +5,10 @@
  * @package breakdownmusic-theme
  */
 ?>
-
+<footer id="colophon" class="fbs__footer mt-3">
 <?php include get_template_directory() . '/assets/templates/footers/template-footer.php';
  include get_template_directory() . '/assets/templates/footers/footer-creditos.php'; ?>
-
+</footer>
 <div id="bd-player-bar" class="bd-player-bar empty">
 	<div class="bd-player-container d-flex align-items-center gap-3">
 		<!-- Info canción -->
