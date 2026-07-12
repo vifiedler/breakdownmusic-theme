@@ -13,7 +13,7 @@
 	<div class="bd-player-container d-flex align-items-center gap-3">
 		<!-- Info canción -->
 		<div class="d-flex align-items-center gap-2 flex-shrink-0" style="min-width:180px;">
-			<img id="bd-player-thumb" src="" alt="Portada" class="bd-player-thumb rounded">
+			<img id="bd-player-thumb" src="#" alt="Portada" class="bd-player-thumb rounded">
 			<div class="d-flex flex-column overflow-hidden">
 				<span id="bd-player-title" class="text-truncate fw-semibold" style="font-size:0.85rem;">
 					Selecciona una canción
