@@ -14,7 +14,7 @@ if (!$faqs) {
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <header class="entry-header mb-5 text-center text-md-start">
         <h1 class="entry-title display-4 fw-bold"><?php echo get_the_title(); ?></h1>
-        <p><?php the_content(); ?></p>
+        <?php the_content(); ?>
     </header>
 
     <div class="entry-content">
