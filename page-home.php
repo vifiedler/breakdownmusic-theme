@@ -16,6 +16,7 @@ get_header();
 ?>
 
 <main id="bd-content" class="mt-3">
+    <h1 class="d-none">Breakdown Music</h1>
     <div class="container-fluid">
         <?php
         $destacados_term = get_term_by('slug', 'destacadas', 'genero_cancion');
