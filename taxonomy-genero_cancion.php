@@ -28,7 +28,7 @@ get_header();
              data-page="1" 
              data-total-pages="0" 
              data-orderby="title" 
-             data-order="ASC">
+             data-order="ASC"><h2 class="d-none">Más canciones</h2>
             <div id="bd-genre-songs-list">
                 <!-- Se llenará via AJAX -->
             </div>
