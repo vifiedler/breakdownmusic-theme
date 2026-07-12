@@ -26,7 +26,7 @@ if ($query->have_posts()) :
             <a href="<?php the_permalink(); ?>" class="bd-card">
                 <div class="bd-card-thumb-wrap">
                     <img src="<?php echo esc_url($img_album); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="bd-card-thumb">
-                    <button class="bd-play-btn" data-id="<?php the_ID(); ?>"><i class="bi bi-play-fill"></i></button>
+                    <span class="bd-play-btn" data-id="<?php the_ID(); ?>"><i class="bi bi-play-fill"></i></span>
                 </div>
                 <p class="bd-card-title"><?php the_title(); ?></p>
                 <p class="bd-card-sub"><?php echo esc_html($artista_nombre); ?></p>
