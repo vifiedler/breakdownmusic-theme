@@ -1,10 +1,10 @@
 /**
  * js-bdmusic.js
  * Dependencias:
- * - jQuery 4.x
- * - YouTube IFrame API
- * - Anime.js (para animaciones)
- * - Bootstrap 5.3 (para el modal) */
+ * JQuery 4
+ * YouTube IFrame API
+ * Anime.js
+ * Bootstrap 5.3 */
 
 (function ($) {
     'use strict';
