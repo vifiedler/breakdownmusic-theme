@@ -39,10 +39,12 @@ if ($query->have_posts()):
                 <div class="bd-card-thumb-wrap">
                     <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"
                         class="bd-card-thumb" loading="lazy">
-                    <button class="bd-play-btn" data-id="<?php the_ID(); ?>" data-url="<?php echo esc_url($url_cancion); ?>"
-    data-post-id="<?php echo get_the_ID(); ?>">
-                        <i class="bi bi-play-fill"></i>
-                    </button>
+                    <?php if (!empty($url_cancion) && get_the_ID()): ?>
+                        <span class="bd-play-btn" role="button" tabindex="0" data-url="<?php echo esc_url($url_cancion); ?>"
+                            data-post-id="<?php echo get_the_ID(); ?>">
+                            <i class="bi bi-play-fill"></i>
+                        </span>
+                    <?php endif; ?>
                 </div>
                 <p class="bd-card-title"><?php the_title(); ?></p>
                 <p class="bd-card-sub"><?php echo esc_html($artista_nombre); ?></p>
