@@ -70,3 +70,6 @@
     flex: none !important;
     padding: 0;
 }
+.font-footer {
+  font-size: 12px;
+}
