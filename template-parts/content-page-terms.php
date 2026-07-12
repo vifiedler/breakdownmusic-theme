@@ -14,10 +14,10 @@ if ( empty( $terminos ) ) {
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <header class="entry-header mb-5 text-center text-md-start">
+    <div class="entry-header mb-5 text-center text-md-start">
         <h1 class="entry-title display-4 fw-bold"><?php the_title(); ?></h1>
         <?php the_content();?>
-    </header>
+</div>
 
     <div class="entry-content">
         <?php
