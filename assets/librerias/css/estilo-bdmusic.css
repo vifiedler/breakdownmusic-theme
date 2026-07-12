@@ -1,14 +1,4 @@
-/* ============================================
-   BREAKDOWN MUSIC — estilo principal
-   Bootstrap 5.3 maneja layout y utilidades.
-   Este archivo solo define lo que Bootstrap
-   no puede: variables, colores, componentes
-   propios y comportamientos custom.
-   ============================================ */
-
-/* ============================================
-   VARIABLES
-   ============================================ */
+/* BREAKDOWN MUSIC — estilo principal */
 :root {
     --bd-bg: #0f0f0f;
     --bd-panel: #161616;
@@ -23,9 +13,6 @@
     --bd-font-logo: 'Frank Ruhl Libre', serif;
 }
 
-/* ============================================
-   BASE — lo que Bootstrap no resetea
-   ============================================ */
 html,
 body {
     background: var(--bd-bg);
@@ -50,11 +37,7 @@ input[type="search"]:focus {
     color: #eee;
 }
 
-/* ============================================
-   TOPBAR
-   Bootstrap: d-flex align-items-center gap-3 px-3 sticky-top
-   Aquí: colores, altura, z-index
-   ============================================ */
+/* barra superior */
 .bd-topbar {
     height: 64px;
     background: var(--bd-bg);
@@ -87,9 +70,7 @@ input[type="search"]:focus {
     background: linear-gradient(135deg, var(--bd-accent), #6a1b1b);
 }
 
-/* Bootstrap: rounded-circle flex-shrink-0 en el HTML */
-
-/* Buscador — WordPress genera el HTML del search form */
+/* buscador */
 .bd-search-wrap {
     flex: 1;
     max-width: 640px;
@@ -139,7 +120,7 @@ display: flex;
     background: var(--bd-accent-hover);
 }
 
-/* Resultados de búsqueda en vivo */
+/* resultados de búsqueda live */
 #bd-search-results .bd-result-item {
     padding: 10px 16px;
     cursor: pointer;
@@ -170,10 +151,7 @@ display: flex;
     border-radius: 12px;
 }
 
-/* ============================================
-   LAYOUT: SIDEBAR + MAIN
-   Bootstrap: d-flex (en .bd-layout del HTML)
-   ============================================ */
+/* Layout general */
 .bd-layout {
     min-height: calc(100vh - 64px);
 }
@@ -228,11 +206,7 @@ display: flex;
     min-width: 0;
 }
 
-/* ============================================
-   HOME — MOOD PILLS
-   Bootstrap: d-flex flex-wrap gap-2 mb-4 (layout)
-   Aquí: color, forma
-   ============================================ */
+/* Home pills */
 .bd-pill {
     background: var(--bd-panel);
     border: 1px solid #2a2a2a;
@@ -251,11 +225,7 @@ display: flex;
     border-color: var(--bd-accent);
 }
 
-/* ============================================
-   HOME — SECCIONES Y HEADERS
-   Bootstrap: mb-4 (bd-section), d-flex justify-content-between align-items-start mb-3 (bd-section-head)
-   Aquí: tipografía y controles
-   ============================================ */
+/* Home secciones y títulos */
 .bd-section {
     margin-bottom: 2.5rem;
 }
@@ -308,9 +278,7 @@ display: flex;
     border-color: var(--bd-text);
 }
 
-/* ============================================
-   CARRUSEL HORIZONTAL
-   ============================================ */
+/* Carrusel */
 .bd-carousel-track {
     display: flex;
     gap: 16px;
@@ -351,11 +319,7 @@ display: flex;
     background: transparent;
 }
 
-/* ============================================
-   CARDS (carrusel)
-   Bootstrap: text-truncate (título/subtítulo), object-fit-cover img
-   Aquí: tamaño fijo, hover, play btn
-   ============================================ */
+/* Cards */
 .bd-card {
     flex: 0 0 200px;
     min-width: 0;
@@ -435,11 +399,7 @@ display: flex;
     background: var(--bd-accent-hover);
 }
 
-/* ============================================
-   SINGLE (ÁLBUM / CANCIÓN)
-   Bootstrap: row g-4 (layout), img-fluid rounded-3 shadow (portada)
-   Aquí: sticky, scroll, tipografía
-   ============================================ */
+/* Single album y canción */
 .bd-single-info {
     flex: 0 0 340px;
     position: sticky;
@@ -508,7 +468,7 @@ display: flex;
     color: var(--bd-accent);
 }
 
-/* Botones de acción */
+/* CTA */
 .bd-action-btn {
     width: 42px;
     height: 42px;
@@ -548,7 +508,7 @@ display: flex;
     border-radius: 3px;
 }
 
-/* Filas de track */
+/* Filas de tracklist */
 .bd-track-row {
     display: flex;
     align-items: center;
@@ -604,11 +564,7 @@ display: flex;
     color: var(--bd-accent);
 }
 
-/* ============================================
-   SONG CARD (grid en álbum / archive)
-   Bootstrap: d-flex align-items-center gap-3 p-2 rounded-3
-   Aquí: hover, play btn
-   ============================================ */
+/* Card de canciones */
 .bd-song-card {
     transition: background 0.15s;
 }
@@ -629,7 +585,7 @@ display: flex;
     opacity: 1;
 }
 
-/* Grid de canciones en archive/álbum */
+/* Grid de canciones en archive */
 .bd-song-grid {
     display: flex;
     flex-direction: column;
@@ -659,9 +615,7 @@ display: flex;
     font-size: .8rem;
 }
 
-/* ============================================
-   ARTIST HERO
-   ============================================ */
+/* Hero del artista */
 .bd-artist-hero {
     min-height: 420px;
     display: flex;
@@ -722,9 +676,7 @@ display: flex;
     color: var(--bd-text);
 }
 
-/* Botones del artista
-   Bootstrap: btn btn-outline-light (Aleatorio/Mix), gap-2 flex-wrap
-   Aquí: pill y subscribe */
+/* Botones del artista */
 .bd-btn-pill {
     background: #242424;
     border: 1px solid #333;
@@ -758,9 +710,7 @@ display: flex;
     color: #fff;
 }
 
-/* Filas de canciones del artista
-   Bootstrap: d-flex align-items-center gap-3 p-2 rounded-3 (en el HTML)
-   Aquí: hover, like */
+/* Filas de canciones del artista */
 .bd-artist-song-row:hover {
     background: #161616;
     color: inherit;
@@ -785,10 +735,7 @@ display: flex;
     color: var(--bd-accent);
 }
 
-/* ============================================
-   FAQ — Bootstrap Accordion (JS nativo de BS)
-   Solo override de colores
-   ============================================ */
+/* FAQ */
 .accordion-item {
     background: var(--bd-card-bg);
     border: 1px solid #2a2a2a;
@@ -824,9 +771,7 @@ display: flex;
     line-height: 1.7;
 }
 
-/* ============================================
-   REPRODUCTOR FIJO INFERIOR
-   ============================================ */
+/* Reproductor */
 .bd-player-bar {
     display: none;
     position: fixed;
@@ -905,11 +850,7 @@ display: flex;
     pointer-events: none;
 }
 
-/* ============================================
-   FOOTER
-   Bootstrap: d-flex justify-content-center gap-4 flex-wrap (layout)
-   Aquí: color, borde
-   ============================================ */
+/* Footer */
 .bd-footer {
     border-top: 1px solid #1e1e1e;
     margin-top: 3rem;
@@ -926,9 +867,7 @@ display: flex;
     color: var(--bd-text);
 }
 
-/* ============================================
-   ANIMACIONES
-   ============================================ */
+/* Animaciones */
 .fade-in-up {
     animation: fadeInUp 0.2s ease-out forwards;
 }
@@ -945,9 +884,7 @@ display: flex;
     }
 }
 
-/* ============================================
-   RESPONSIVE
-   ============================================ */
+/* Media queries */
 @media (max-width: 991px) {
     .bd-sidebar {
         position: fixed;
@@ -1052,6 +989,7 @@ display: flex;
         display: none;
     }
 }
+/* Modal en reproductor */
 
 #bdSongModal .modal-dialog {
     max-width: 92%;
