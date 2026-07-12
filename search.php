@@ -10,11 +10,11 @@ get_header();
 
 <main id="bd-content" class="site-main">
     <div class="container-fluid py-4">
-
+<h1 class="d-none">Página de búsqueda</h1>
         <!-- Título de búsqueda -->
         <div class="row mb-4">
             <div class="col-12">
-                <h1 class="bd-search-title h2 fw-bold">
+                <h2 class="bd-search-title h2 fw-bold">
                     <?php
                     printf(
                         /* translators: %s: search query */
@@ -22,7 +22,7 @@ get_header();
                         '<span class="text-danger">' . get_search_query() . '</span>'
                     );
                     ?>
-                </h1>
+                </h2>
             </div>
         </div>
 
