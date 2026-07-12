@@ -6,13 +6,9 @@
  */
 ?>
 
-<!-- ============================================================
-	 FOOTER TRADICIONAL (zonas de widgets)
-	 ============================================================ -->
-<?php include get_template_directory() . '/assets/templates/footers/template-footer.php'; ?>
-<!-- ============================================================
-	 REPRODUCTOR FIJO INFERIOR (siempre visible)
-	 ============================================================ -->
+<?php include get_template_directory() . '/assets/templates/footers/template-footer.php';
+ include get_template_directory() . '/assets/templates/footers/footer-créditos.php'; ?>
+
 <div id="bd-player-bar" class="bd-player-bar empty">
 	<div class="bd-player-container d-flex align-items-center gap-3">
 		<!-- Info canción -->
@@ -54,18 +50,17 @@
 	</div>
 </div>
 
-<!-- Contenedor oculto para YouTube (necesario para el reproductor) -->
+<!-- Contenedor oculto para YouTube -->
 <div id="bd-youtube-player" style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px;"></div>
-<!-- Modal para vista expandida de canción (carga AJAX) -->
+<!-- Modal para vista expandida de canción -->
 <div class="modal fade" id="bdSongModal" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog modal-fullscreen"> <!-- usa modal-fullscreen para ocupar toda la pantalla -->
+	<div class="modal-dialog modal-fullscreen">
 		<div class="modal-content bg-dark text-white border-0">
 			<div class="modal-header border-0">
 				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 					aria-label="Cerrar"></button>
 			</div>
 			<div class="modal-body" id="bd-song-modal-body">
-				<!-- El contenido del single se inyecta aquí vía AJAX -->
 			</div>
 		</div>
 	</div>
