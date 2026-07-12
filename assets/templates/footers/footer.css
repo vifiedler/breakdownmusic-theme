@@ -15,7 +15,7 @@
     width: auto;
 }
 
-/* footer_2: links (Nav Menu widget genera <ul>) */
+/* footer_2: links */
 .fbs__footer-links,
 .fbs__footer .menu {
     display: flex;
@@ -49,7 +49,6 @@
     color: #555;
 }
 
-/* Fix: Nav Menu widget genera un div wrapper interno */
 .fbs__footer-links .menu-contacto-container {
     display: contents;
 }
@@ -65,7 +64,7 @@
     padding: 0;
 }
 
-/* col-md-3 puesto en los <li> desde el panel de menús */
+/* enlaces */
 .fbs__footer-links ul.menu li {
     width: auto !important;
     flex: none !important;
