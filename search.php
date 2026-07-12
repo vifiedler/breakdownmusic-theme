@@ -10,7 +10,7 @@ get_header();
 
 <main id="bd-content" class="site-main">
     <div class="container-fluid py-4">
-<h1 class="d-none">Página de búsqueda</h1>
+        <h1 class="d-none">Página de búsqueda</h1>
         <!-- Título de búsqueda -->
         <div class="row mb-4">
             <div class="col-12">
@@ -26,10 +26,11 @@ get_header();
             </div>
         </div>
 
-        <?php if (have_posts()) : ?>
+        <?php if (have_posts()): ?>
             <!-- Grid de resultados -->
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                <?php while (have_posts()) : the_post(); ?>
+                <?php while (have_posts()):
+                    the_post(); ?>
                     <div class="col">
                         <?php
                         // Usar el mismo template que en archive (content-*.php)
@@ -45,16 +46,16 @@ get_header();
                 <div class="col-12">
                     <?php
                     the_posts_pagination(array(
-                        'mid_size'  => 2,
+                        'mid_size' => 2,
                         'prev_text' => '<i class="bi bi-chevron-left"></i>',
                         'next_text' => '<i class="bi bi-chevron-right"></i>',
-                        'class'     => 'pagination justify-content-center',
+                        'class' => 'pagination justify-content-center',
                     ));
                     ?>
                 </div>
             </div>
 
-        <?php else : ?>
+        <?php else: ?>
             <!-- Sin resultados -->
             <div class="row">
                 <div class="col-12 text-center py-5">
@@ -65,7 +66,8 @@ get_header();
                             <?php esc_html_e('Intenta con otras palabras clave o revisa la ortografía.', 'breakdownmusic-theme'); ?>
                         </p>
                         <a href="<?php echo home_url('/'); ?>" class="btn btn-outline-light mt-2">
-                            <i class="bi bi-house-fill"></i> <?php esc_html_e('Volver al inicio', 'breakdownmusic-theme'); ?>
+                            <i class="bi bi-house-fill"></i>
+                            <?php esc_html_e('Volver al inicio', 'breakdownmusic-theme'); ?>
                         </a>
                     </div>
                 </div>
@@ -73,7 +75,7 @@ get_header();
 
             <!-- Alerta via JS (como está) -->
             <script>
-                (function() {
+                (function () {
                     var query = '<?php echo esc_js(get_search_query()); ?>';
                     alert('Lo sentimos, "' + query + '" no se encuentra disponible.');
                 })();
