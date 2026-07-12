@@ -1010,5 +1010,5 @@ display: flex;
 /*Arreglo card con focus activo*/
 a:focus {
   outline: none;
-  color: transparent;
+  color: var(--bd-text);
 }
