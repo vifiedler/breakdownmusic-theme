@@ -1,4 +1,4 @@
-<div class="container row credits pt-3 justify-content-end ms-5">
+<div class="container row credits pt-3 justify-content-end">
     <div class="row font-footer">
         <div class="col-xl-8 text-center mb-3 mb-xl-0">
             <!--
