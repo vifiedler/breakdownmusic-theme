@@ -1,31 +1,17 @@
 /**
  * js-bdmusic.js
- * Funcionalidades principales del sitio Breakdown Music
- * 
  * Dependencias:
  * - jQuery 4.x
  * - YouTube IFrame API
  * - Anime.js (para animaciones)
- * - Bootstrap 5.3 (para el modal)
- * 
- * Metodología: Programación no obstructiva, basada en eventos.
- * Todas las interacciones se asignan a elementos del DOM una vez que
- * el documento está listo.
- * 
- * @package breakdownmusic-theme
- * @author Tu Nombre
- */
+ * - Bootstrap 5.3 (para el modal) */
 
 (function ($) {
     'use strict';
 
-    // ============================================================
-    // 1. CONFIGURACIÓN INICIAL Y VARIABLES GLOBALES
-    // ============================================================
+    // Variables globales
 
-    /**
-     * Variables del reproductor de YouTube
-     */
+    /* Variables del reproductor de YouTube */
     var player = null,
         playerReady = false,
         currentVideoId = '',
@@ -35,11 +21,9 @@
         isPlaying = false,
         progressInterval = null,
         isDragging = false,
-        currentPostId = null; // ID del post de la canción actual
+        currentPostId = null; //ID POST canción actual
 
-    /**
-     * Referencias a elementos del DOM
-     */
+    /* Referencias a elementos del DOM */
     var playerBar = $('#bd-player-bar'),
         playerThumb = $('#bd-player-thumb'),
         playerTitle = $('#bd-player-title'),
@@ -51,22 +35,16 @@
         timeCurrent = $('#bd-player-time-current'),
         timeTotal = $('#bd-player-time-total');
 
-    // ============================================================
-    // 2. FUNCIONES AUXILIARES
-    // ============================================================
+    // Otras funciones
 
-    /**
-     * Extrae el ID de un video de YouTube desde una URL.
-     */
+    /* Extrae el ID de un video de YouTube desde una URL */
     function bdExtractVideoId(url) {
         if (!url) return null;
         var match = url.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})(?:[&?]|$)/);
         return match ? match[1] : null;
     }
 
-    /**
-     * Convierte segundos a formato MM:SS.
-     */
+    /* Convierte segundos a formato MM:SS */
     function bdFormatTime(seconds) {
         if (!seconds || isNaN(seconds)) return '0:00';
         var mins = Math.floor(seconds / 60);
@@ -74,9 +52,7 @@
         return mins + ':' + (secs < 10 ? '0' : '') + secs;
     }
 
-    // ============================================================
-    // 3. REPRODUCTOR DE YOUTUBE
-    // ============================================================
+    // Reproductor de YT
 
     function bdInitYouTubePlayer() {
         if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
@@ -161,16 +137,13 @@
                 timeCurrent.text(bdFormatTime(current));
                 timeTotal.text(bdFormatTime(duration));
             }
-        } catch (e) { /* ignore */ }
+        } catch (e) { }
     }
 
-    /**
-     * Carga y reproduce una canción. Recibe el postId para guardarlo.
-     */
+    /* Carga y reproduce una canción. Recibe el postId para guardarlo */
     function bdPlaySong(videoId, title, artist, thumb, postId) {
         if (!videoId) return;
-
-        // Si es la misma canción, solo pausa/reanuda
+        // Misma canción pausa/reanuda
         if (currentVideoId === videoId) {
             if (player && playerReady) {
                 var state = player.getPlayerState();
@@ -189,7 +162,7 @@
         currentThumb = thumb || '';
         currentPostId = postId || null;
 
-        // Actualizar interfaz
+        // Actualización de Interfaz
         playerTitle.text(currentTitle);
         playerArtist.text(currentArtist);
         playerThumb.attr('src', currentThumb || 'https://img.youtube.com/vi/' + videoId + '/default.jpg');
@@ -218,10 +191,7 @@
     window.bdExtractVideoId = bdExtractVideoId;
     window.bdInitYouTubePlayer = bdInitYouTubePlayer;
 
-    // ============================================================
-    // 4. EVENTOS DE REPRODUCCIÓN
-    // ============================================================
-
+    // Eventos de reproducción
     // Botón en tarjetas
     $(document).on('click', '.bd-play-btn', function (e) {
         e.preventDefault();
@@ -276,7 +246,7 @@
         setTimeout(function () { $btn.css('transform', 'scale(1)'); }, 200);
     });
 
-    // Botón principal en single de canción
+    // Botón principal en single canción
     $(document).on('click', '#bd-play-main', function (e) {
         e.preventDefault();
 
@@ -302,7 +272,7 @@
         setTimeout(function () { $btn.css('transform', 'scale(1)'); }, 200);
     });
 
-    // Botón play/pausa del reproductor fijo
+    // Botón play/pausa del reproductor
     $('#bd-player-play').on('click', function () {
         if (!player || !playerReady) {
             console.warn('Reproductor no listo');
@@ -316,7 +286,7 @@
         }
     });
 
-    // Barra de progreso arrastrable
+    // Barra de progreso
     progressWrap.on('mousedown', function (e) {
         if (!player || !playerReady) return;
         isDragging = true;
@@ -347,9 +317,7 @@
         });
     });
 
-    /**
-     * Evento del chevron: abre el modal con la información de la canción actual.
-     */
+    /* Evento del chevron: abre el modal */
     playerToggle.on('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -357,11 +325,9 @@
         var postId = currentPostId;
         if (!postId) {
             console.warn('No hay canción seleccionada para mostrar en el modal.');
-            // Opcional: mostrar un mensaje en la consola o en la interfaz
             return;
         }
-
-        // Si el reproductor está minimizado, expandirlo (opcional)
+        // Si el reproductor está minimizado, expandirlo
         if (playerBar.hasClass('minimized')) {
             playerBar.removeClass('minimized');
             $(this).find('i').removeClass('bi-chevron-up').addClass('bi-chevron-down');
@@ -394,7 +360,7 @@
             .then(function (data) {
                 if (data.html) {
                     modalBody.html(data.html);
-                    // Abrir el modal de Bootstrap
+                    // Abrir el modal
                     var modalElement = document.getElementById('bdSongModal');
                     if (modalElement) {
                         var modal = new bootstrap.Modal(modalElement);
@@ -412,17 +378,14 @@
             });
     });
 
-    // Inicializar reproductor
+    // Iniciar reproductor
     bdInitYouTubePlayer();
-
     // Limpiar intervalo al salir
     $(window).on('beforeunload', function () {
         if (progressInterval) clearInterval(progressInterval);
     });
 
-    // ============================================================
-    // 6. CARRUSEL DE TARJETAS
-    // ============================================================
+    // Carrusel cards
     if ($('.bd-carousel-track').length) {
 
         if (typeof anime !== 'undefined') {
@@ -503,9 +466,7 @@
         };
     }
 
-    // ============================================================
-    // 7. NAVEGACIÓN AJAX
-    // ============================================================
+    // Nav por AJAX
     $(document).on('click', 'a', function (e) {
         var $link = $(this);
         var href = $link.attr('href');
@@ -592,9 +553,7 @@
         bdLoadPage(location.href);
     });
 
-    // ============================================================
-    // 8. BÚSQUEDA EN TIEMPO REAL
-    // ============================================================
+    // Búsqueda en tiempo real por AJAX
     var searchTimeout = null;
 
     function bdPerformSearch(query) {
@@ -660,9 +619,7 @@
         }
     });
 
-    // ============================================================
-    // 9. SCROLL INFINITO: canciones del mismo género
-    // ============================================================
+    // Scroll Infinito en canciones del género
     var genreContainer = $('#bd-genre-songs-container');
 
     if (genreContainer.length) {
@@ -704,6 +661,7 @@
                             var duration = song.duration ?
                                 String(Math.floor(song.duration / 60)).padStart(2, '0') + ':' + String(song.duration % 60).padStart(2, '0') :
                                 '';
+                            //Insertar por JSON
                             var $item = $(`
                                 <div class="bd-song-card d-flex align-items-center gap-3 p-2 rounded-3" style="cursor:pointer;">
                                     <div class="bd-song-thumb-wrap position-relative flex-shrink-0" style="width:52px;height:52px;">
@@ -776,9 +734,7 @@
         });
     }
 
-    // ============================================================
-    // 10. SCROLL INFINITO: todas las canciones (archive)
-    // ============================================================
+    // Scroll Infinito en archive de canciones
     var archiveContainer = $('#bd-all-songs-container');
 
     if (archiveContainer.length) {
@@ -824,6 +780,7 @@
                             var duration = song.duration ?
                                 String(Math.floor(song.duration / 60)).padStart(2, '0') + ':' + String(song.duration % 60).padStart(2, '0') :
                                 '';
+                            //JSON
                             var $item = $(`
                                 <div class="bd-artist-song-row d-flex align-items-center gap-3 p-2 rounded-3 w-100" data-id="${song.id}">
                                     <span class="d-flex align-items-center gap-1 flex-shrink-0" style="width:40px;">
@@ -906,9 +863,7 @@
         });
     }
 
-    // ============================================================
-    // 11. ANIMACIONES PARA ACORDEONES
-    // ============================================================
+    // Animaciones para acordeón con animejs
     if (typeof anime !== 'undefined') {
         var accordionItems = document.querySelectorAll('.accordion-item');
         if (accordionItems.length) {
@@ -936,54 +891,36 @@
             });
         });
     }
-    // ============================================================
-    // 1. LÓGICA DEL BOTÓN HAMBURGUESA (Móvil y Tablet)
-    // ============================================================
+    // Hamburguer button
     var $sidebar = $('#bd-sidebar');
-    
-    // Primero: Nos aseguramos de quitar cualquier control nativo de Bootstrap al botón
-    // por si acaso quedó algún atributo en tu header.php
     $('#bd-burger').removeAttr('data-bs-toggle').removeAttr('data-bs-target');
-
-    // Evento click de la hamburguesa
-    $('#bd-burger').on('click', function(e) {
+    $('#bd-burger').on('click', function (e) {
         e.preventDefault();
-        
-        // Solo actuamos en pantallas móviles (<= 768px)
         if (window.innerWidth <= 768) {
-            // Solo alternamos la clase. ¡Tu nav.css ya hace el efecto de deslizar!
             $sidebar.toggleClass('open');
         }
     });
-
-    // EVENTO RESIZE: La cura para cuando vuelves a escritorio
-    $(window).on('resize', function() {
+    $(window).on('resize', function () {
         if (window.innerWidth > 768) {
-            // Si agrandamos la pantalla a escritorio:
-            // 1. Quitamos la clase 'open' del móvil
             $sidebar.removeClass('open');
-            // 2. Limpiamos cualquier rastro de transformaciones en línea que haya dejado JS
-            $sidebar.css('transform', ''); 
+            $sidebar.css('transform', '');
         }
     });
     jQuery(document).ready(function ($) {
 
-        // ============================================================
-        // LÓGICA DE ACORDEÓN PARA DROPDOWNS (MENÚ LATERAL)
-        // ============================================================
+        // Acordeón para dropdowns de nav
 
-        // 1. Desactivamos el dropdown nativo de Bootstrap
+        // Desactivar acordeón nativo de BS
         $('.bd-vertical-nav-list .dropdown-toggle').removeAttr('data-bs-toggle');
 
-        // 2. Aplicamos la lógica de acordeón animado
+        // JS para acordeón propio
         $('.bd-vertical-nav-list .dropdown-toggle').on('click', function (e) {
             e.preventDefault();
 
             var $parentLi = $(this).parent('.dropdown');
             var $submenu = $parentLi.find('.dropdown-menu');
             var isOpening = !$parentLi.hasClass('show');
-
-            // Comportamiento de Acordeón: Cerrar otros submenús abiertos
+            // Cerrar otros submenus abiertos
             var $otherDropdowns = $('.bd-vertical-nav-list .dropdown.show').not($parentLi);
             if ($otherDropdowns.length) {
                 $otherDropdowns.removeClass('show');
@@ -996,22 +933,19 @@
                     easing: 'easeOutQuad'
                 });
             }
-
-            // Abrir o cerrar el submenú en el que hicimos clic
+            // Abrir o cerrar el submenu clickeado
             if (isOpening) {
                 $parentLi.addClass('show');
                 $(this).addClass('show');
-
-                // Calculamos la altura real del contenido para que abra exacto
+                // Cálculo de altura para submenu con animejs
                 var targetHeight = $submenu[0].scrollHeight;
-
                 anime({
                     targets: $submenu[0],
                     maxHeight: targetHeight,
                     duration: 350,
                     easing: 'easeOutCubic',
                     complete: function () {
-                        // Quitamos el límite temporalmente por si hay sub-niveles
+                        // si hay submenus abiertos se quita el límite
                         $submenu.css('max-height', 'none');
                     }
                 });
