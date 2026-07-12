@@ -9,10 +9,10 @@ function js_function()
         wp_enqueue_script('bootstrap-js');
         wp_enqueue_script('anime-js');
         wp_enqueue_script('custom-js');
-
+//para llamar al AJAX
         wp_localize_script('custom-js', 'bd_ajax', array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'rest_url' => rest_url('breakdown/v1/'), // 👈 Debe estar aquí
+            'rest_url' => rest_url('breakdown/v1/'),
             'nonce' => wp_create_nonce('bd_ajax_nonce'),
             'search_url' => home_url('/'),
         ));
