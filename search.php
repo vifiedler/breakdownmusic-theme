@@ -60,7 +60,7 @@ get_header();
                 <div class="col-12 text-center py-5">
                     <div class="bd-search-empty">
                         <i class="bi bi-music-note-beamed display-1 text-secondary mb-3 d-block"></i>
-                        <h3 class="h4"><?php esc_html_e('No se encontraron resultados', 'breakdownmusic-theme'); ?></h3>
+                        <h2 class="h4"><?php esc_html_e('No se encontraron resultados', 'breakdownmusic-theme'); ?></h2>
                         <p class="text-muted">
                             <?php esc_html_e('Intenta con otras palabras clave o revisa la ortografía.', 'breakdownmusic-theme'); ?>
                         </p>
