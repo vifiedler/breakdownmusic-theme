@@ -112,7 +112,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_Menu
         $atts['title'] = !empty($item->attr_title) ? $item->attr_title : '';
         $atts['target'] = !empty($item->target) ? $item->target : '';
         $atts['rel'] = !empty($item->xfn) ? $item->xfn : '';
-        $atts['href'] = !empty($item->url) ? $item->url : '';
+        $atts['href'] = !empty($item->url) ? $item->url : '#';
 
         if ($args->walker->has_children) {
             $atts['data-bs-toggle'] = 'dropdown';
