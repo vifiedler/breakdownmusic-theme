@@ -7,7 +7,7 @@
 ?>
 
 <?php include get_template_directory() . '/assets/templates/footers/template-footer.php';
- include get_template_directory() . '/assets/templates/footers/footer-créditos.php'; ?>
+ include get_template_directory() . '/assets/templates/footers/footer-creditos.php'; ?>
 
 <div id="bd-player-bar" class="bd-player-bar empty">
 	<div class="bd-player-container d-flex align-items-center gap-3">
