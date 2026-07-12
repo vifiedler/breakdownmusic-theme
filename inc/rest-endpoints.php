@@ -1,8 +1,7 @@
 <?php
 /**
- * REST API endpoints para datos de música
+ * REST API endpoints para datos de música y JSON (opcional pero útil)
  */
-
 // Endpoint: /breakdown/v1/song/{id}
 add_action('rest_api_init', function () {
     register_rest_route('breakdown/v1', '/song/(?P<id>\d+)', array(
@@ -36,7 +35,7 @@ function bd_get_song_data($data)
     );
 }
 
-// Endpoint: /breakdown/v1/songs-by-artist/{id}
+// /breakdown/v1/songs-by-artist/{id}
 add_action('rest_api_init', function () {
     register_rest_route('breakdown/v1', '/songs-by-artist/(?P<id>\d+)', array(
         'methods' => 'GET',
@@ -72,7 +71,7 @@ function bd_get_songs_by_artist($data)
     return $songs;
 }
 
-// Endpoint: /breakdown/v1/songs-by-genre/{slug}
+// /breakdown/v1/songs-by-genre/{slug}
 add_action('rest_api_init', function () {
     register_rest_route('breakdown/v1', '/songs-by-genre/(?P<slug>[a-zA-Z0-9-_]+)', array(
         'methods' => 'GET',
@@ -148,7 +147,7 @@ function bd_get_songs_by_genre($data)
     );
 }
 
-// Endpoint: /breakdown/v1/all-songs
+// /breakdown/v1/all-songs
 add_action('rest_api_init', function () {
     register_rest_route('breakdown/v1', '/all-songs', array(
         'methods' => 'GET',
@@ -221,13 +220,13 @@ function bd_get_song_content($data)
         return new WP_Error('no_song', 'Canción no encontrada', array('status' => 404));
     }
 
-    // Configurar el contexto global para que get_template_part funcione
+    // Configurar para que get_template_part funcione
     global $post;
     $post = get_post($post_id);
     setup_postdata($post);
 
     ob_start();
-    // Cargar el template part que contiene el layout del single
+    // Cargar el template part que contiene el layout
     get_template_part('template-parts/content-single', 'canciones');
     $html = ob_get_clean();
 

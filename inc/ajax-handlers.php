@@ -2,10 +2,7 @@
 /**
  * AJAX handlers for Breakdown Music
  */
-
-// ============================================================
 // AJAX para búsqueda en vivo
-// ============================================================
 function bd_ajax_search() {
     check_ajax_referer('bd_ajax_nonce', 'nonce');
 
