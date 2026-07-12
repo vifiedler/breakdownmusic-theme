@@ -19,11 +19,8 @@ get_header();
         </div>
 
         <!-- Contenedor para las canciones (scroll infinito) -->
-        <div id="bd-all-songs-container" 
-             data-page="1" 
-             data-total-pages="0" 
-             data-orderby="title" 
-             data-order="ASC"><h2 class="d-none">Más canciones</h2>
+        <div id="bd-all-songs-container" data-page="1" data-total-pages="0" data-orderby="title" data-order="ASC">
+            <h2 class="d-none">Nuestra biblioteca</h2>
             <div id="bd-all-songs-list">
                 <!-- Se llenará via AJAX como lista -->
             </div>
