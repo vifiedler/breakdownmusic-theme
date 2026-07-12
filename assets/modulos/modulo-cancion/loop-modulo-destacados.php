@@ -36,7 +36,7 @@ if ($query->have_posts()):
                     <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"
                         class="bd-card-thumb" loading="lazy">
                     <?php if (!empty($url_cancion) && get_the_ID()): ?>
-                        <span class="bd-play-btn" role="button" tabindex="0" data-url="<?php echo esc_url($url_cancion); ?>"
+                        <span class="bd-play-btn" data-url="<?php echo esc_url($url_cancion); ?>"
                             data-post-id="<?php echo get_the_ID(); ?>">
                             <i class="bi bi-play-fill"></i>
                         </span>
