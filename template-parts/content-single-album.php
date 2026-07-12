@@ -125,7 +125,7 @@ if (!empty($album_songs)) {
         <!-- Columna derecha: canciones del álbum + género -->
         <div class="col-lg-8 col-xl-9 bd-single-tracklist">
             <!-- Canciones del álbum -->
-            <h3 class="h5 fw-bold mb-3">Canciones del álbum</h3>
+            <h2 class="h5 fw-bold mb-3">Canciones del álbum</h2>
             <?php
 			$album_id_loop = get_the_ID();
 			include get_template_directory() . '/assets/modulos/modulo-album/loop-mp-canciones-del-album.php';
@@ -134,7 +134,7 @@ if (!empty($album_songs)) {
             <!-- Sección: Otras canciones del género -->
             <?php if ($genero_slug): ?>
             <hr class="my-4 border-secondary">
-            <h3 class="h5 fw-bold mb-3">Otras canciones de <?php echo esc_html($genero_nombre); ?></h3>
+            <h2 class="h5 fw-bold mb-3">Otras canciones de <?php echo esc_html($genero_nombre); ?></h2>
             <div id="bd-genre-songs-container" data-genre="<?php echo esc_attr($genero_slug); ?>"
                 data-album-id="<?php the_ID(); ?>" data-page="1" data-total-pages="0">
                 <div id="bd-genre-songs-list" class="bd-song-grid">
