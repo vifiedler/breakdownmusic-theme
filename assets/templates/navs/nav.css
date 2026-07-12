@@ -1,8 +1,4 @@
-/* ==========================================================================
-   REDISEÑO DE LAYOUT: TOPBAR & SIDEBAR VERTICAL (Breakdown Music)
-   ========================================================================== */
-
-/* --- 1. Ajustes de la Topbar Fija --- */
+/* Topbar fija */
 #masthead.fbs__net-navbar {
     position: fixed;
     top: 0;
@@ -40,17 +36,14 @@
     width: auto;
 }
 
-/* --- 2. Contenedor Sidebar Lateral --- */
+/* Contenedor sidebar lateral */
 .bd-sidebar-vertical {
     position: fixed;
     top: 64px;
-    /* Justo debajo de la Topbar */
     left: 0;
     width: var(--bd-sidebar-w);
-    /* 220px */
     height: calc(100vh - 64px);
     background-color: var(--bd-panel);
-    /* #161616 */
     border-right: 1px solid #1a1a1a;
     /*z-index: 1040;*/
     overflow-y: auto;
@@ -59,7 +52,7 @@
     padding-bottom: 90px;
 }
 
-/* --- 3. Lista de Enlaces (Reseteo de Bootstrap a Vertical) --- */
+/* Enlaces */
 .bd-vertical-nav-list {
     list-style: none;
     padding: 0;
@@ -84,13 +77,12 @@
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: none;
-    /* Más limpio para menú vertical */
     border-bottom: none !important;
     white-space: nowrap;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Iconos dentro de los enlaces (si se configuran o inyectan) */
+/* Iconos dentro de los enlaces */
 .bd-vertical-nav-list .nav-item .nav-link i,
 .bd-vertical-nav-list .nav-item .nav-link::before {
     margin-right: 1rem;
@@ -112,16 +104,15 @@
     padding-left: calc(1.25rem - 3px) !important;
 }
 
-/* --- 4. ESTILIZADO DE LOS 2 DROPDOWNS (Efecto Acordeón Vital) --- */
-
-/* Forzamos a que la flecha nativa de Bootstrap se vaya a la derecha */
+/* Dropdowns del nav */
+/* Forzar flecha a la derecha */
 .bd-vertical-nav-list .dropdown-toggle::after {
     margin-left: auto !important;
     vertical-align: middle;
     transition: transform 0.3s ease;
 }
 
-/* Rompemos el menú flotante absoluto de Bootstrap */
+/* Sobreescribir menu de BS */
 .bd-vertical-nav-list .dropdown-menu {
     position: static !important;
     float: none !important;
@@ -137,10 +128,9 @@
     display: block; 
 }
 
-/* Sub-enlaces del dropdown */
+/* Subenlaces del dropdown */
 .bd-vertical-nav-list .dropdown-menu .dropdown-item {
     padding: 0.65rem 1.25rem 0.65rem 3.25rem !important;
-    /* Sangría hacia la derecha */
     color: var(--bd-text-muted) !important;
     font-size: 0.8rem;
     background: none !important;
@@ -150,34 +140,25 @@
 .bd-vertical-nav-list .dropdown-menu .dropdown-item:hover {
     color: var(--bd-text) !important;
     padding-left: 3.5rem !important;
-    /* Pequeño empuje al hacer hover */
 }
 
-/* --- REGLAS DE PREVISUALIZACIÓN VISUAL (Simulación Pre-JS) --- */
+/* sim pre JS */
 
-.bd-vertical-nav-list .dropdown:hover .dropdown-toggle::after,
+/*.bd-vertical-nav-list .dropdown:hover .dropdown-toggle::after,
 .bd-vertical-nav-list .dropdown.show .dropdown-toggle::after {
     transform: rotate(180deg);
-    /* La flecha gira limpiamente */
-}
+}*/
 
 
-/* ==========================================================================
-   SISTEMA DE DESPLAZAMIENTO (PUSH EFFECT) PARA EL CONTENIDO PRINCIPAL
-   ========================================================================== */
+/* Push effect (si es que funciona) */
 
-/* Modificamos el contenedor general de tu WordPress */
 #page.site {
     padding-top: 64px;
-    /* Espacio para que el contenido no quede debajo de la Topbar */
     min-height: 100vh;
 }
-
-/* El main de tus páginas empuja hacia la derecha la anchura del menú */
 #bd-content,
 .site-main {
     margin-left: var(--bd-sidebar-w);
-    /* 220px */
     width: calc(100% - var(--var-sidebar-w));
     transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -186,37 +167,26 @@
 #bd-content,
 .site-main {
     padding-bottom: 90px;
-    /* Ajusta a la altura de tu reproductor */
 }
 
-/* ==========================================================================
-   CLASES PREPARADAS PARA EL EFECTO COLAPSADO (CUANDO ACTUEMOS CON JS)
-   ========================================================================== */
-
-
-/* Evitar que se abran los acordeones si el menú está en formato de iconos compactos */
+/* Clases para colapso con JS (Si es que funciona xd) */
+/* Acordeones no se abren si está compacto */
 .bd-sidebar-vertical.collapsed .dropdown-menu {
     max-height: 0 !important;
 }
 
-
-/* ==========================================================================
-   RESPONSIVIDAD MÓVIL (Menú tipo Drawer)
-   ========================================================================== */
+/* Responsive */
 @media (max-width: 768px) {
     .bd-sidebar-vertical {
         transform: translateX(-100%);
-        /* Completamente oculto a la izquierda */
         width: var(--bd-sidebar-w) !important;
     }
 
     #bd-content,
     .site-main {
         margin-left: 0 !important;
-        /* Ocupa el 100% en pantallas móviles */
     }
-
-    /* Clase que activará el JS en móvil para abrirlo por encima */
+    /* Clase que activará el JS en móvil */
     .bd-sidebar-vertical.open {
         transform: translateX(0);
         z-index: 1;
@@ -224,55 +194,45 @@
     }
 }
 
-/* --- Ajustes de la Topbar tipo Spotify / YT Music --- */
+/* Ajustes topbar tipo Spotify/YTMusic*/
 
-/* La caja de la izquierda (Botón + Logo) no debe aplastarse */
+/* Caja de la izquierda (botón+logo)*/
 .bd-topbar-left {
     flex-shrink: 0;
 }
-
-/* El logo por defecto (si subes imagen) */
+/* logo por defecto*/
 .bd-logo-wrap img {
     max-height: 38px;
     width: auto;
     display: block;
 }
 
-/* --- Control del Buscador --- */
+/* control del search*/
 .bd-topbar-search {
     flex: 1;
-    /* Permite que el buscador crezca... */
     max-width: 480px;
-    /* ...pero detiene su crecimiento en 480px (ancho ideal) */
     margin-left: 2.5rem;
-    /* Lo separa del logo */
     margin-right: auto;
-    /* Al poner auto aquí, evitamos que se vaya a la derecha y lo mantenemos a la izquierda/centro */
 }
 
-/* Ajustes visuales para el formulario del buscador (searchform.php) */
+/* ajustes para formulario de buscador*/
 .bd-topbar-search .bd-search-form {
     display: flex;
     align-items: center;
     background-color: #1a1a1a;
-    /* Tono gris oscuro de fondo */
     border: 1px solid #333;
     border-radius: 24px;
-    /* Bordes redondeados modernos */
     padding: 2px 6px 2px 16px;
     width: 100%;
 }
 
 .bd-topbar-search .bd-search-input {
     box-shadow: none !important;
-    /* Quita el resplandor azul de Bootstrap al hacer clic */
 }
 
-/* ==========================================================================
-   COMPATIBILIDAD CON BARRA DE ADMINISTRADOR DE WORDPRESS
-   ========================================================================== */
+/* para que no lo tape la barra de administrador*/
 
-/* En Escritorio (Barra de WP mide 32px) */
+/* Desk */
 .admin-bar #masthead.fbs__net-navbar {
     top: 32px !important;
 }
@@ -282,7 +242,7 @@
     height: calc(100vh - 64px - 32px) !important;
 }
 
-/* En Móviles (Barra de WP mide 46px) */
+/* móvil */
 @media screen and (max-width: 782px) {
     .admin-bar #masthead.fbs__net-navbar {
         top: 46px !important;
@@ -294,7 +254,7 @@
     }
 }
 
-/* --- Limpieza forzada de márgenes del Logo para evitar que se desalinee --- */
+/* logo no se desalinea */
 .bd-logo-wrap .navbar-brand {
     margin: 0 !important;
     padding: 0 !important;
@@ -306,7 +266,7 @@
 @media (max-width: 768px) {
     .bd-sidebar-vertical {
         transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out; /* ¡Esta es la magia que hace que deslice suave! */
+        transition: transform 0.3s ease-in-out;
     }
     
     .bd-sidebar-vertical.open {
