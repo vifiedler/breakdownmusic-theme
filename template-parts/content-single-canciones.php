@@ -115,7 +115,7 @@ $anio_album = $album_id ? get_field('anio_lanzamiento', $album_id) : '';
 
         <!-- Columna derecha: canciones del mismo artista -->
         <div class="col-lg-8 col-xl-9 bd-single-tracklist me-3" id="bd-tracklist">
-            <h3 class="h5 fw-bold mb-3">Canciones de <?php echo esc_html($artista_nombre); ?></h3>
+            <h2 class="h5 fw-bold mb-3">Canciones de <?php echo esc_html($artista_nombre); ?></h2>
             <?php
 			$artista_id_loop = $artista_id;
 			include get_template_directory() . '/assets/modulos/modulo-cancion/loop-mp-relacionadas-artista.php';
