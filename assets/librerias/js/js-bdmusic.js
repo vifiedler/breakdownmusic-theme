@@ -9,16 +9,21 @@
 (function ($) {
     'use strict';
 
-    // Verificación de edad antes de cargar
-    var edad = prompt("Ingresa tu edad para continuar:");
-    edad = parseInt(edad);
-
-    if (!isNaN(edad) && edad > 14) {
-        alert("Bienvenido a Breakdown Music");
-    } else {
-        alert("Debes ser mayor de 14 años para ingresar.");
-        return;
+    // Verificación de edad, solo en homepage
+    var esHomepage = window.location.pathname === '/breakdown-music/' || window.location.pathname === '/breakdown-music';
+ 
+    if (esHomepage) {
+        var edad = prompt("Ingresa tu edad para continuar:");
+        edad = parseInt(edad);
+ 
+        if (!isNaN(edad) && edad > 14) {
+            alert("Bienvenido a Breakdown Music");
+        } else {
+            alert("Debes ser mayor de 14 años para ingresar.");
+            return;
+        }
     }
+
 
     // Variables globales
 
