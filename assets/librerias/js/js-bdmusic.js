@@ -5,12 +5,19 @@
  * YouTube IFrame API
  * Anime.js
  * Bootstrap 5.3 */
+$(function () {
+    var edad = prompt("Ingresa tu edad para continuar:");
+    edad = parseInt(edad);
 
+    if (!isNaN(edad) && edad > 14) {
+        alert("Bienvenido a Breakdown Music");
+    } else {
+        alert("Debes ser mayor de 14 años para ingresar.");
+        window.location.href = "https://google.com";
+    }
+});
 (function ($) {
-    'use strict';
-
     // Variables globales
-
     /* Variables del reproductor de YouTube */
     var player = null,
         playerReady = false,
@@ -22,7 +29,6 @@
         progressInterval = null,
         isDragging = false,
         currentPostId = null; //ID POST canción actual
-
     /* Referencias a elementos del DOM */
     var playerBar = $('#bd-player-bar'),
         playerThumb = $('#bd-player-thumb'),
