@@ -19,7 +19,7 @@
             alert("Bienvenido a Breakdown Music");
         } else {
             alert("Debes ser mayor de 14 años para ingresar.");
-            return;
+            window.location.href = "https://google.com";
         }
     }
     // Variables globales
