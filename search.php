@@ -33,8 +33,7 @@ get_header();
                     the_post(); ?>
                     <div class="col">
                         <?php
-                        // Usar el mismo template que en archive (content-*.php)
-                        // Pero como tenemos diferentes post types, usamos un template unificado
+                        // Usar el mismo template que en archive
                         get_template_part('template-parts/content', 'search-card');
                         ?>
                     </div>
@@ -72,8 +71,7 @@ get_header();
                     </div>
                 </div>
             </div>
-
-            <!-- Alerta via JS (como está) -->
+            <!-- Alerta via JS -->
             <script>
                 (function () {
                     var query = '<?php echo esc_js(get_search_query()); ?>';

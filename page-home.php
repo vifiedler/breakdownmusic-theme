@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package nota4-template
+ * @package bdmusic-template
  */
 
 get_header();
@@ -51,9 +51,7 @@ get_header();
                 </div>
             </section>
         <?php endif; ?>
-<!-- ============================================================
-     ARTISTAS (todos)
-     ============================================================ -->
+<!-- artistas -->
 <section class="bd-section row mb-5">
     <div class="col-12">
         <div class="bd-section-head d-flex justify-content-between align-items-center mb-3">
@@ -77,9 +75,7 @@ get_header();
     </div>
 </section>
 
-<!-- ============================================================
-     ÁLBUMES (todos)
-     ============================================================ -->
+<!-- discos -->
 <section class="bd-section row mb-5">
     <div class="col-12">
         <div class="bd-section-head d-flex justify-content-between align-items-center mb-3">

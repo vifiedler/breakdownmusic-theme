@@ -125,7 +125,7 @@
     margin: 0 !important;
     max-height: 0;
     overflow: hidden;
-    display: block; 
+    display: block;
 }
 
 /* Subenlaces del dropdown */
@@ -156,6 +156,7 @@
     padding-top: 64px;
     min-height: 100vh;
 }
+
 #bd-content,
 .site-main {
     margin-left: var(--bd-sidebar-w);
@@ -186,6 +187,7 @@
     .site-main {
         margin-left: 0 !important;
     }
+
     /* Clase que activará el JS en móvil */
     .bd-sidebar-vertical.open {
         transform: translateX(0);
@@ -200,6 +202,7 @@
 .bd-topbar-left {
     flex-shrink: 0;
 }
+
 /* logo por defecto*/
 .bd-logo-wrap img {
     max-height: 38px;
@@ -268,7 +271,7 @@
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
     }
-    
+
     .bd-sidebar-vertical.open {
         transform: translateX(0);
     }

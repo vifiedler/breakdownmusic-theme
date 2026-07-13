@@ -33,29 +33,26 @@ if ($query->have_posts()) :
         if (!$thumb_url) $thumb_url = 'https://via.placeholder.com/300x300?text=No+Image';
         $title = get_the_title();
 ?>
-        <div class="bd-track-row d-flex align-items-center gap-3 p-2 rounded-3" data-id="<?php the_ID(); ?>">
-            <span class="bd-track-num">
-                <button class="bd-play-btn-track bg-transparent border-0 text-secondary p-0" 
-                        data-url="<?php echo esc_url($url_cancion); ?>"
-    data-post-id="<?php echo get_the_ID(); ?>" 
-                        data-thumb="<?php echo esc_url($thumb_url); ?>"
-                        data-title="<?php echo esc_attr($title); ?>"
-                        data-artist="<?php echo esc_attr($artista_nombre); ?>"
-                        title="Reproducir">
-                    <i class="bi bi-play-fill"></i>
-                </button>
-            </span>
-            <div class="flex-grow-1 min-width-0">
-                <p class="fw-semibold text-truncate mb-0">
-                    <a href="<?php the_permalink(); ?>" class="text-decoration-none"><?php echo esc_html($title); ?></a>
-                </p>
-                <p class="text-secondary text-truncate small mb-0"><?php echo esc_html($artista_nombre); ?></p>
-            </div>
-            <button class="bd-track-like bg-transparent border-0 text-secondary" data-id="<?php the_ID(); ?>">
-                <i class="bi bi-hand-thumbs-up"></i>
-            </button>
-            <span class="text-secondary small"><?php echo esc_html($duracion); ?></span>
-        </div>
+<div class="bd-track-row d-flex align-items-center gap-3 p-2 rounded-3" data-id="<?php the_ID(); ?>">
+    <span class="bd-track-num">
+        <button class="bd-play-btn-track bg-transparent border-0 text-secondary p-0"
+            data-url="<?php echo esc_url($url_cancion); ?>" data-post-id="<?php echo get_the_ID(); ?>"
+            data-thumb="<?php echo esc_url($thumb_url); ?>" data-title="<?php echo esc_attr($title); ?>"
+            data-artist="<?php echo esc_attr($artista_nombre); ?>" title="Reproducir">
+            <i class="bi bi-play-fill"></i>
+        </button>
+    </span>
+    <div class="flex-grow-1 min-width-0">
+        <p class="fw-semibold text-truncate mb-0">
+            <a href="<?php the_permalink(); ?>" class="text-decoration-none"><?php echo esc_html($title); ?></a>
+        </p>
+        <p class="text-secondary text-truncate small mb-0"><?php echo esc_html($artista_nombre); ?></p>
+    </div>
+    <button class="bd-track-like bg-transparent border-0 text-secondary" data-id="<?php the_ID(); ?>">
+        <i class="bi bi-hand-thumbs-up"></i>
+    </button>
+    <span class="text-secondary small"><?php echo esc_html($duracion); ?></span>
+</div>
 <?php
         $i++;
     endwhile;

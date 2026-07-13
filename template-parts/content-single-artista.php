@@ -24,8 +24,8 @@ if (!$img_url) {
                     <div class="col-12">
                         <h1 class="bd-artist-name display-3 fw-bold"><?php the_title(); ?></h1>
                         <?php if ($biografia): ?>
-                            <p class="bd-artist-bio text-light" id="bd-artist-bio"><?php echo get_field('biografia'); ?>
-                            </p>
+                        <p class="bd-artist-bio text-light" id="bd-artist-bio"><?php echo get_field('biografia'); ?>
+                        </p>
                         <?php endif; ?>
                         <div class="bd-artist-actions d-flex flex-wrap gap-2 mt-3">
                             <button class="bd-btn-pill btn btn-outline-light">

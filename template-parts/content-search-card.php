@@ -5,7 +5,7 @@
  * @package breakdownmusic-theme
  */
 
-// Obtener datos según el tipo de post
+// Obtener datos según tipo post
 $post_type = get_post_type();
 $img_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
 if (!$img_url) {
@@ -33,23 +33,23 @@ if ($post_type === 'canciones') {
 	$subtitle = get_post_type_object($post_type)->labels->singular_name ?? 'Entrada';
 }
 
-// Si es una canción, obtener URL para el botón play
+// Si es una canción obtiene URL para play
 $url_cancion = ($post_type === 'canciones') ? get_field('url_cancion') : '';
 ?>
 
 <div class="bd-card h-100">
-	<a href="<?php echo esc_url($permalink); ?>" class="d-block text-decoration-none text-white">
-		<div class="bd-card-thumb-wrap">
-			<img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($title); ?>" class="bd-card-thumb"
-				loading="lazy">
-			<?php if ($post_type === 'canciones' && $url_cancion): ?>
-				<button class="bd-play-btn" data-url="<?php echo esc_url($url_cancion); ?>"
-    data-post-id="<?php echo get_the_ID(); ?>">
-					<i class="bi bi-play-fill"></i>
-				</button>
-			<?php endif; ?>
-		</div>
-		<p class="bd-card-title"><?php echo esc_html($title); ?></p>
-		<p class="bd-card-sub"><?php echo esc_html($subtitle); ?></p>
-	</a>
+    <a href="<?php echo esc_url($permalink); ?>" class="d-block text-decoration-none text-white">
+        <div class="bd-card-thumb-wrap">
+            <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($title); ?>" class="bd-card-thumb"
+                loading="lazy">
+            <?php if ($post_type === 'canciones' && $url_cancion): ?>
+            <button class="bd-play-btn" data-url="<?php echo esc_url($url_cancion); ?>"
+                data-post-id="<?php echo get_the_ID(); ?>">
+                <i class="bi bi-play-fill"></i>
+            </button>
+            <?php endif; ?>
+        </div>
+        <p class="bd-card-title"><?php echo esc_html($title); ?></p>
+        <p class="bd-card-sub"><?php echo esc_html($subtitle); ?></p>
+    </a>
 </div>

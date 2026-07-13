@@ -21,7 +21,6 @@ if (empty($terminos)) {
 
     <div class="entry-content">
         <?php
-        // Título de la sección (opcional)
         ?>
         <div class="accordion" id="termsAccordion">
             <?php foreach ($terminos as $index => $termino):
@@ -32,27 +31,26 @@ if (empty($terminos)) {
                 $titulo = !empty($termino['titulo_terminos']) ? $termino['titulo_terminos'] : 'Término ' . ($index + 1);
                 $respuesta = !empty($termino['respuesta_terminos']) ? $termino['respuesta_terminos'] : '';
                 ?>
-                <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden shadow-sm">
-                    <h2 class="accordion-header" id="<?php echo esc_attr($item_id); ?>">
-                        <button
-                            class="accordion-button <?php echo $index !== 0 ? 'collapsed' : ''; ?> bg-transparent text-white fw-bold py-3 px-4"
-                            type="button" data-bs-toggle="collapse"
-                            data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
-                            aria-expanded="<?php echo esc_attr($expanded); ?>"
-                            aria-controls="<?php echo esc_attr($collapse_id); ?>">
-                            <span
-                                class="me-3 text-danger fs-5"><?php echo str_pad($index + 1, 2, '0', STR_PAD_LEFT); ?></span>
-                            <?php echo esc_html($titulo); ?>
-                        </button>
-                    </h2>
-                    <div id="<?php echo esc_attr($collapse_id); ?>"
-                        class="accordion-collapse collapse <?php echo esc_attr($show); ?>" role="region"
-                        aria-labelledby="<?php echo esc_attr($item_id); ?>" data-bs-parent="#termsAccordion">
-                        <div class="accordion-body bg-dark bg-opacity-50 text-light p-4">
-                            <?php echo wp_kses_post($respuesta); ?>
-                        </div>
+            <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden shadow-sm">
+                <h2 class="accordion-header" id="<?php echo esc_attr($item_id); ?>">
+                    <button
+                        class="accordion-button <?php echo $index !== 0 ? 'collapsed' : ''; ?> bg-transparent text-white fw-bold py-3 px-4"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
+                        aria-expanded="<?php echo esc_attr($expanded); ?>"
+                        aria-controls="<?php echo esc_attr($collapse_id); ?>">
+                        <span
+                            class="me-3 text-danger fs-5"><?php echo str_pad($index + 1, 2, '0', STR_PAD_LEFT); ?></span>
+                        <?php echo esc_html($titulo); ?>
+                    </button>
+                </h2>
+                <div id="<?php echo esc_attr($collapse_id); ?>"
+                    class="accordion-collapse collapse <?php echo esc_attr($show); ?>" role="region"
+                    aria-labelledby="<?php echo esc_attr($item_id); ?>" data-bs-parent="#termsAccordion">
+                    <div class="accordion-body bg-dark bg-opacity-50 text-light p-4">
+                        <?php echo wp_kses_post($respuesta); ?>
                     </div>
                 </div>
+            </div>
             <?php endforeach; ?>
         </div>
     </div><!-- .entry-content -->

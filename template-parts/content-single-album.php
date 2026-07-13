@@ -57,9 +57,8 @@ if (!empty($album_songs)) {
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="row g-4 bd-single-layout">
 
-        <!-- Columna izquierda: info del álbum -->
+        <!-- Columna izquierda: info del disco -->
         <div class="col-lg-4 col-xl-3 bd-single-info">
-            <!-- Breadcrumb: artista -->
             <?php if ($artista_id): ?>
             <a href="<?php echo get_permalink($artista_id); ?>"
                 class="d-flex align-items-center gap-2 text-decoration-none small fw-semibold mb-3 bd-single-breadcrumb">
@@ -72,22 +71,20 @@ if (!empty($album_songs)) {
                 <span><?php echo esc_html($artista_nombre); ?></span>
             </span>
             <?php endif; ?>
-
             <!-- Portada -->
             <div class="bd-single-cover mb-3">
                 <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"
                     class="img-fluid rounded-3 shadow">
             </div>
-
             <!-- Título -->
             <h1 class="bd-single-title h2 fw-bold"><?php the_title(); ?></h1>
-
-            <!-- Meta -->
+            <!-- Info extra -->
             <div class="d-flex flex-column gap-1 small mb-3">
                 <div class="d-flex align-items-center gap-2">
                     <i class="bi bi-person-fill"></i>
                     <?php if ($artista_id): ?>
-                    <a href="<?php echo get_permalink($artista_id); ?>" class="text-decoration-none"><?php echo esc_html($artista_nombre); ?></a>
+                    <a href="<?php echo get_permalink($artista_id); ?>"
+                        class="text-decoration-none"><?php echo esc_html($artista_nombre); ?></a>
                     <?php else: ?>
                     <?php echo esc_html($artista_nombre); ?>
                     <?php endif; ?>
@@ -98,13 +95,11 @@ if (!empty($album_songs)) {
                 </div>
                 <?php endif; ?>
             </div>
-
             <!-- Descripción -->
             <?php if ($descripcion): ?>
             <p class="bd-single-desc small"><?php echo wp_kses_post($descripcion); ?></p>
             <?php endif; ?>
-
-            <!-- Acciones -->
+            <!-- botones debajo -->
             <div class="d-flex align-items-center gap-3 mt-3 bd-single-actions">
                 <button class="btn btn-outline-secondary btn-sm rounded-circle bd-action-btn" title="Descargar">
                     <i class="bi bi-download"></i>
@@ -121,17 +116,15 @@ if (!empty($album_songs)) {
                 </button>
             </div>
         </div>
-
-        <!-- Columna derecha: canciones del álbum + género -->
+        <!-- Columna derecha: canciones del disco + género -->
         <div class="col-lg-8 col-xl-9 bd-single-tracklist">
-            <!-- Canciones del álbum -->
+            <!-- Canciones del disco -->
             <h2 class="h5 fw-bold mb-3">Canciones del álbum</h2>
             <?php
 			$album_id_loop = get_the_ID();
 			include get_template_directory() . '/assets/modulos/modulo-album/loop-mp-canciones-del-album.php';
 			?>
-
-            <!-- Sección: Otras canciones del género -->
+            <!-- Sección: Otras canciones -->
             <?php if ($genero_slug): ?>
             <hr class="my-4 border-secondary">
             <h2 class="h5 fw-bold mb-3">Otras canciones de <?php echo esc_html($genero_nombre); ?></h2>

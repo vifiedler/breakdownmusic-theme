@@ -17,7 +17,7 @@ get_header();
             <div class="col-12">
                 <h1 class="bd-archive-title"><?php echo esc_html($current_term->name); ?></h1>
                 <?php if ($current_term->description): ?>
-                    <p class="bd-archive-description"><?php echo esc_html($current_term->description); ?></p>
+                <p class="bd-archive-description"><?php echo esc_html($current_term->description); ?></p>
                 <?php endif; ?>
             </div>
         </div>
