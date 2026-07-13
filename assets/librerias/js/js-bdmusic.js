@@ -5,7 +5,11 @@
  * YouTube IFrame API
  * Anime.js
  * Bootstrap 5.3 */
-$(function () {
+
+(function ($) {
+    'use strict';
+
+    // Verificación de edad antes de cargar
     var edad = prompt("Ingresa tu edad para continuar:");
     edad = parseInt(edad);
 
@@ -13,11 +17,11 @@ $(function () {
         alert("Bienvenido a Breakdown Music");
     } else {
         alert("Debes ser mayor de 14 años para ingresar.");
-        window.location.href = "https://google.com";
+        return;
     }
-});
-(function ($) {
+
     // Variables globales
+
     /* Variables del reproductor de YouTube */
     var player = null,
         playerReady = false,
@@ -29,6 +33,7 @@ $(function () {
         progressInterval = null,
         isDragging = false,
         currentPostId = null; //ID POST canción actual
+
     /* Referencias a elementos del DOM */
     var playerBar = $('#bd-player-bar'),
         playerThumb = $('#bd-player-thumb'),
@@ -198,12 +203,13 @@ $(function () {
     window.bdInitYouTubePlayer = bdInitYouTubePlayer;
 
     // Eventos de reproducción
-    // Botón en tarjetas
-    $(document).on('click', '.bd-play-btn', function (e) {
+    // Botón unificado: tarjetas, listas de canciones y single
+    $(document).on('click', '.bd-play-btn, .bd-play-btn-track, #bd-play-main', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
         var $btn = $(this);
+        var $card = $btn.closest('.bd-card, .bd-song-card, .bd-artist-song-row');
         var url = $btn.data('url');
         if (!url) return;
 
@@ -213,68 +219,15 @@ $(function () {
             return;
         }
 
-        var title = $btn.data('title') || $btn.closest('.bd-card').find('.bd-card-title').text().trim() || 'Canción';
-        var artist = $btn.data('artist') || $btn.closest('.bd-card').find('.bd-card-sub').text().trim() || 'Artista';
-        var thumb = $btn.data('thumb') || $btn.closest('.bd-card').find('img').attr('src') || '';
-        var postId = $btn.data('post-id') || $btn.closest('.bd-card').data('post-id') || 0;
+        var title = $btn.data('title') || $card.find('.bd-card-title, #bd-single-titulo').first().text().trim() || 'Canción';
+        var artist = $btn.data('artist') || $card.find('.bd-card-sub, #bd-single-artista').first().text().trim() || 'Artista';
+        var thumb = $btn.data('thumb') || $card.find('img').attr('src') || $('.bd-single-cover img').attr('src') || '';
+        var postId = $btn.data('post-id') || $card.data('post-id') || 0;
 
         if (!player) bdInitYouTubePlayer();
         bdPlaySong(videoId, title, artist, thumb, postId);
 
         $btn.css('transform', 'scale(0.8)');
-        setTimeout(function () { $btn.css('transform', 'scale(1)'); }, 200);
-    });
-
-    // Botón en listas de canciones
-    $(document).on('click', '.bd-play-btn-track', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        var $btn = $(this);
-        var url = $btn.data('url');
-        if (!url) return;
-
-        var videoId = bdExtractVideoId(url);
-        if (!videoId) {
-            alert('URL de YouTube no válida');
-            return;
-        }
-
-        var title = $btn.data('title') || 'Canción';
-        var artist = $btn.data('artist') || 'Artista';
-        var thumb = $btn.data('thumb') || '';
-        var postId = $btn.data('post-id') || 0;
-
-        if (!player) bdInitYouTubePlayer();
-        bdPlaySong(videoId, title, artist, thumb, postId);
-
-        $btn.css('transform', 'scale(0.8)');
-        setTimeout(function () { $btn.css('transform', 'scale(1)'); }, 200);
-    });
-
-    // Botón principal en single canción
-    $(document).on('click', '#bd-play-main', function (e) {
-        e.preventDefault();
-
-        var $btn = $(this);
-        var url = $btn.data('url');
-        if (!url) return;
-
-        var videoId = bdExtractVideoId(url);
-        if (!videoId) {
-            alert('URL de YouTube no válida');
-            return;
-        }
-
-        var title = $('#bd-single-titulo').text().trim() || 'Canción';
-        var artist = $('#bd-single-artista').text().trim() || 'Artista';
-        var thumb = $('.bd-single-cover img').attr('src') || '';
-        var postId = $btn.data('post-id') || 0;
-
-        if (!player) bdInitYouTubePlayer();
-        bdPlaySong(videoId, title, artist, thumb, postId);
-
-        $btn.css('transform', 'scale(0.9)');
         setTimeout(function () { $btn.css('transform', 'scale(1)'); }, 200);
     });
 
@@ -912,7 +865,8 @@ $(function () {
             $sidebar.css('transform', '');
         }
     });
-    jQuery(document).ready(function ($) {
+
+    $(function ($) {
 
         // Acordeón para dropdowns de nav
 
