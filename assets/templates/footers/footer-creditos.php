@@ -8,7 +8,7 @@
                 =>>> Buy the pro version, which includes a functional PHP/AJAX contact form and many additional features.: https://freebootstrap.net/template/vertex-pro-bootstrap-website-template-for-portfolio/ <<<=
                 -->
             &copy;
-            <script>document.write(new Date().getFullYear());</script> Breakdown.
+            <script><?php echo date('Y'); ?></script> Breakdown.
             Derechos Reservados. Hecho con <i class="bi bi-heart-fill text-danger"></i> por <a
                 href="https://vifiedler.laboratoriodiseno.cl">Vicente Fiedler</a>
         </div>
